@@ -29,8 +29,6 @@
 
         }
 
-        .select2-container--default.select2-container--focus .select2-selection--multiple {}
-
         .select2-container--default .select2-selection--multiple .select2-selection__placeholder {
             color: #ffffff !important;
         }
@@ -151,7 +149,7 @@
             <!-- Poster Preview -->
             <div id="poster-preview-container" class="mt-4 hidden">
                 <p class="text-white font-semibold mb-1">Poster Preview:</p>
-                <img id="poster-preview" class="w-64 h-auto rounded bg-gray-800" alt="Poster Preview">
+                <img id="poster-preview" class="w-64 h-auto rounded bg-gray-800" alt="Poster Preview" loading="lazy">
             </div>
 
             <!-- ✅ Title_Poster Upload -->
@@ -166,7 +164,7 @@
             <!-- Title Poster Preview -->
             <div id="title-poster-preview-container" class="mt-4 hidden">
                 <p class="text-white font-semibold mb-1">Title Poster Preview:</p>
-                <img id="title-poster-preview" class="w-64 h-auto rounded bg-gray-800" alt="Title Poster Preview">
+                <img id="title-poster-preview" class="w-64 h-auto rounded bg-gray-800" alt="Title Poster Preview" loading="lazy">
             </div>
 
             <!-- Submit -->

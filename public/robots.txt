@@ -1,2 +1,9 @@
 User-agent: *
-Disallow:
+Disallow: /vendor/
+Disallow: /storage/
+Disallow: /nova/
+Disallow: /horizon/
+Disallow: /telescope/
+Disallow: /admin/
+
+Sitemap: {{ url('sitemap.xml') }}

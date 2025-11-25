@@ -7,7 +7,7 @@ use App\Models\Plan;
 
 class AccountController extends Controller
 {
-    
+
     public function membership()
     {
         $data = $this->getSubscriptionData(auth()->user());
@@ -24,18 +24,20 @@ class AccountController extends Controller
 
     protected function getSubscriptionData($user)
     {
-        $subscription = $user->subscription('default');
+        $subscription = $user->subscriptions()
+            ->where('stripe_status', 'active')  // or 'status'
+            ->latest()
+            ->first();
 
         $planName = 'No Plan';
         $startsAt = null;
         $endsAt = null;
 
         if ($subscription) {
-            $plan = Plan::where('stripe_price_id', $subscription->stripe_price)->first();
-
+            $plan = Plan::find($subscription->plan_id);
             $planName = $plan->name ?? 'Unknown Plan';
             $startsAt = $subscription->created_at;
-            $endsAt = $subscription->ends_at;
+            $endsAt = $subscription->expires_at ?? null;
         }
 
         return compact('subscription', 'planName', 'startsAt', 'endsAt');

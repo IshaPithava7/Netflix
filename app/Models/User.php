@@ -54,7 +54,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_users');
+        return $this->belongsToMany(Role::class, 'role_users')
+            ->withTimestamps();
     }
 
     // Check if user has a role
@@ -78,6 +79,34 @@ class User extends Authenticatable implements MustVerifyEmail
         )->withTimestamps();
     }
 
+    public function CustomeSubscription()
+    {
+        return $this->hasMany(CustomeSubscription::class);
+    }
 
+    protected static function booted()
+    {
+        static::deleting(function ($user) {
+
+            // Soft delete pivot if not force deleting
+            if (!$user->isForceDeleting()) {
+                $user->roles()->updateExistingPivot(
+                    $user->roles->pluck('id'),
+                    ['deleted_at' => now()]
+                );
+            } else {
+                // If force delete → remove pivot completely
+                $user->roles()->detach();
+            }
+        });
+
+        static::restoring(function ($user) {
+            // Restore pivot roles
+            $user->roles()->withTrashed()->updateExistingPivot(
+                $user->roles->withTrashed()->pluck('id'),
+                ['deleted_at' => null]
+            );
+        });
+    }
 
 }

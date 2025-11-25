@@ -7,7 +7,8 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Services\UserServices;
-use Arr;
+use App\Services\AuthService;
+use Illuminate\Support\Arr;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -21,6 +22,14 @@ use App\Events\UserRegistered;
 
 class AuthController extends Controller
 {
+    protected $authService;
+    protected $userService;
+
+    public function __construct(AuthService $authService, UserServices $userService)
+    {
+        $this->authService = $authService;
+        $this->userService = $userService;
+    }
 
     public function checkEmail(AuthRequest $AuthRequest)
     {
@@ -39,9 +48,9 @@ class AuthController extends Controller
         return view('layouts.auth.register', compact('email'));
     }
 
-    public function register(RegisterRequest $request, UserServices $userService)
+    public function register(RegisterRequest $request)
     {
-        $user = $userService->register($request->validated());
+        $user = $this->userService->register($request->validated());
 
         $role = Role::where('name', 'USER')->first();
 
@@ -61,31 +70,9 @@ class AuthController extends Controller
         return view('layouts.auth.login', compact('email'));
     }
 
-    public function login(LoginRequest $loginRequest)
+    public function login(LoginRequest $request)
     {
-        $credentials = $loginRequest->validated();
-
-        $loginRequest->session()->regenerate();
-
-        if (Auth::attempt($credentials)) {
-
-            $user = Auth::user();
-
-            if ($user->hasRole('Admin')) {
-                return redirect()->route('admin.dashboard')
-                    ->with('success', 'Welcome back Admin!');
-            }
-
-            if ($user->subscribed('default')) {
-                return redirect()->route('home')
-                    ->with('success', 'Welcome back! You already have an active plan.');
-            }
-
-            return redirect()->route('subscription')
-                ->with('success', 'Welcome! Please choose a plan to continue.');
-        }
-
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        return $this->authService->login($request);
     }
 
     public function logout(Request $request)
@@ -93,20 +80,14 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('dashboard');
+        return redirect('/login');
     }
 
-    public function showForgotPassword()
-    {
-        return view('layouts.auth.forgot-password');
-    }
 
     public function sendResetLinkEmail(AuthRequest $AuthRequest)
     {
-        $data = $AuthRequest->validated();
-
         $status = Password::sendResetLink([
-            'email' => $data['email'],
+            'email' => $AuthRequest->email,
         ]);
 
         return $status === Password::RESET_LINK_SENT
@@ -114,47 +95,42 @@ class AuthController extends Controller
             : back()->withErrors(['email' => __($status)]);
     }
 
+
     public function showResetPasswordForm($token)
     {
         return view('layouts.auth.reset-password', ['token' => $token]);
     }
 
 
-    public function resetPassword(ResetPasswordRequest $ResetPasswordRequest)
+    public function resetPassword(ResetPasswordRequest $request)
     {
-        $data = $ResetPasswordRequest->validated();
-
         $status = Password::reset(
-            $data = Arr::only($data, [
-                'email',
-                'password',
-                'password_confirmation',
-                'token'
-            ]),
-            function ($user, $password) {
+            $request->validated(),
+            function (User $user, string $password) {
                 $user->password = Hash::make($password);
                 $user->save();
             }
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('loginPage')->with('status', __($status))
+            ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
 
+
     public function deleteAccount(Request $request)
     {
-        $user = $request->user();
+        $user = Auth::user();
 
-        if ($user->subscribed('default')) {
-            $user->subscription('default')->cancelNow();
-        }
-
-        Auth::logout();
+        // Soft delete the user
         $user->delete();
 
-        return redirect('/')->with('success', 'Your account has been deleted.');
+        // Logout the user
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login')->with('success', 'Your account has been successfully deleted.');
     }
-
-
 }

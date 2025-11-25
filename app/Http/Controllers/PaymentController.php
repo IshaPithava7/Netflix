@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use Laravel\Cashier\Exceptions\IncompletePayment;
 use Illuminate\Support\Facades\Auth;
+use App\Services\PaymentService;
 
 class PaymentController extends Controller
 {
+    protected $paymentService;
+
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+    
     /**
      * Show available subscription plans.
      */
@@ -28,7 +35,16 @@ class PaymentController extends Controller
             'resolution',
             'devices'
         )->get();
-        return view('subscription.subscription', compact('plans'));
+
+        // Define gradient colors
+        $colors = [
+            'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+            'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+            'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)',
+            'linear-gradient(135deg, #ec4899 0%, #dc2626 100%)',
+        ];
+
+        return view('subscription.subscription', compact('plans', 'colors'));
     }
 
     /**
@@ -84,90 +100,12 @@ class PaymentController extends Controller
      */
     public function subscribe(Request $request)
     {
-        $user = Auth::user();
-
-        // Skip payment for admins
-        if ($user->is_admin) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Admin users do not need a subscription.',
-                'redirect' => route('admin.dashboard'), // Admin dashboard route
-            ]);
+        $result = $this->paymentService->createSubscription($request, Auth::user());
+        
+        if (isset($result['error'])) {
+            return response()->json(['error' => $result['error']], 422);
         }
 
-        $request->validate([
-            'payment_method' => 'required|string',
-            'plan' => 'required|string',
-        ]);
-
-
-        try {
-            $plan = Plan::where('stripe_price_id', $request->plan)->firstOrFail();
-
-            $user->createOrGetStripeCustomer();
-            $user->updateDefaultPaymentMethod($request->payment_method);
-
-            $user->newSubscription('default', $plan->stripe_price_id)
-                ->create($request->payment_method, [
-                    'email' => $user->email,
-                ]);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Subscription successful!',
-                'redirect' => route('home')
-            ]);
-
-        } catch (IncompletePayment $exception) {
-            return response()->json([
-                'requires_action' => true,
-                'payment_intent_client_secret' => $exception->payment->client_secret
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 422);
-        }
+        return response()->json($result);
     }
-
-
-    /**
-     * Confirm successful subscription/payment.
-     */
-    public function confirmPayment(Request $request)
-    {
-        $user = Auth::user();
-
-        if ($user->subscribed('default')) {
-            return redirect()->route('home')->with('success', 'Payment successful! Your subscription is active.');
-        }
-
-        return redirect()->route('subscription')->with('error', 'Payment confirmation failed. Please try again.');
-    }
-
-
-    /**
-     * Cancel the user's subscription.
-     */
-    public function cancelSubscription()
-    {
-        $user = auth()->user();
-
-        $subscription = $user->subscription('default');
-
-        if (!$subscription || !$subscription->active()) {
-            return redirect()->back()->with('error', 'No active subscription to cancel.');
-        }
-
-        try {
-            // Cancel immediately at Stripe and in DB
-            $subscription->cancel();
-
-            return redirect()->back()->with('success', 'Your subscription has been canceled successfully.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to cancel subscription: ' . $e->getMessage());
-        }
-    }
-
-
 }

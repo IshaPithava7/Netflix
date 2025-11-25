@@ -17,13 +17,13 @@
         {{-- Logo Section --}}
         <div class=" flex items-center flex-shrink-0">
             <a href="#">
-                <img src="{{ asset('storage/logo/Logonetflix.png') }}" alt="Netflix Logo" class="w-26 h-auto">
+                <img src="{{ asset('storage/logo/Logonetflix.png') }}" alt="Netflix Logo" class="w-26 h-auto" loading="lazy"> 
             </a>
         </div>
 
         <div class=" flex items-center flex-shrink-0">
             <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none group">
-                <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="Profile"
+                <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="Profile" loading="lazy"
                     class="rounded w-8 h-8">
                 <svg viewBox="0 0 16 16" width="16" height="16" data-icon="CaretDownSmall" data-icon-id=":rn:"
                     data-uia="account+header+menu+Icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@
 
                 {{-- Back to Netflix --}}
                 <a href="{{ route('home') }}"
-                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition border-b border-gray-200 group !no-underline">
+                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition border-b border-gray-200 group no-underline!">
                     <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -50,7 +50,7 @@
 
                 {{-- Account --}}
                 <a href="{{ route('overview') }}"
-                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition group !no-underline">
+                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition group no-underline!">
                     <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -60,7 +60,7 @@
 
                 {{-- Manage Profiles --}}
                 <a href="{{ route('profiles') }}"
-                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition group !no-underline">
+                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition group no-underline!">
                     <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -70,7 +70,7 @@
 
                 {{-- Help Centre --}}
                 <a href="#" target="_blank"
-                    class="flex items-center justify-between gap-3 px-3 py-3 hover:bg-gray-50 transition border-b border-gray-200 group !no-underline">
+                    class="flex items-center justify-between gap-3 px-3 py-3 hover:bg-gray-50 transition border-b border-gray-200 group no-underline!">
                     <div class="flex items-center gap-3">
                         <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -86,7 +86,7 @@
 
                 {{-- Switch Profile --}}
                 <a href="#"
-                    class="flex items-center justify-between w-full px-3 py-3 hover:bg-gray-50 transition group !no-underline">
+                    class="flex items-center justify-between w-full px-3 py-3 hover:bg-gray-50 transition group no-underline!">
                     <span class="font-medium text-gray-900">Switch Profile</span>
                     <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -116,14 +116,14 @@
                 <nav class="space-y-1">
                     {{-- Back Link --}}
                     <a href="{{ route('home') }}"
-                        class="flex items-center gap-3 px-4 py-3 mb-4 text-black font-medium !no-underline">
+                        class="flex items-center gap-3 px-4 py-3 mb-4 text-black font-medium no-underline!">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         Back to Netflix
                     </a>
-                    <a href="{{ route('overview') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 !no-underline text-black
+                    <a href="{{ route('overview') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 no-underline! text-black
                         {{ request()->routeIs('overview') ? 'text-black' : 'text-gray-600' }}">
                         <svg viewBox="0 0 24 24" width="24" height="24" data-icon="HomeMedium" data-icon-id=":r78:"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" role="img">
@@ -134,7 +134,7 @@
                         Overview
                     </a>
 
-                    <a href="{{ route('membership') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50  !no-underline text-black
+                    <a href="{{ route('membership') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 no-underline! text-black
                         {{ request()->routeIs('membership') ? 'text-black' : 'text-gray-600' }}">
                         <svg viewBox="0 0 24 24" width="24" height="24" data-icon="CreditCardFillMedium"
                             data-icon-id=":r79:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -146,7 +146,7 @@
                         Membership
                     </a>
 
-                    <a href="{{ route('security') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50  !no-underline text-black
+                    <a href="{{ route('security') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 no-underline! text-black
                          {{ request()->routeIs('security') ? 'text-black' : 'text-gray-600 ' }}">
                         <svg viewBox="0 0 24 24" width="24" height="24" data-icon="ShieldCheckmarkMedium"
                             data-icon-id=":r4v:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -158,7 +158,7 @@
                         Security
                     </a>
 
-                    <a href="{{ route('devices') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 !no-underline text-black 
+                    <a href="{{ route('devices') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 no-underline! text-black 
                            {{ request()->routeIs('devices') ? 'text-black' : 'text-gray-600 ' }}">
                         <svg viewBox="0 0 24 24" width="24" height="24" data-icon="TvMobileMedium" data-icon-id=":r5c:"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" role="img">
@@ -169,7 +169,7 @@
                         Devices
                     </a>
 
-                    <a href="{{ route('profiles') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 !no-underline text-black
+                    <a href="{{ route('profiles') }}" class="flex items-center gap-3 px-4 py-3 font-semibold hover:bg-gray-50 no-underline! text-black
                            {{ request()->routeIs('profiles') ? 'text-black' : 'text-gray-600  ' }}">
                         <svg viewBox="0 0 24 24" width="24" height="24" data-icon="ProfilesMedium"
                             data-icon-id=":Rjald9lalal6:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

@@ -6,7 +6,7 @@
 
         <!-- Close Button -->
         <button id="closeModal"
-            class="absolute top-4 right-4 flex items-center justify-center w-8 h-8 !rounded-full bg-[#181818] text-white text-3xl font-light z-50">
+            class="absolute top-4 right-4 flex items-center justify-center w-8 h-8 rounded-full! bg-[#181818] text-white text-3xl font-light z-50">
             <svg viewBox="0 0 24 24" width="18" height="18" data-icon="XMedium" data-icon-id=":r2c:" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="none" role="img">
                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -19,7 +19,7 @@
         <div class="relative w-[850px] h-[500px] overflow-hidden shadow-2xl">
 
             {{-- Poster --}}
-            <img id="modalPoster" src="{{ $poster }}" alt="{{ $featured->title }}"
+            <img id="modalPoster" src="{{ $poster }}" alt="{{ $featured->title }}" loading="lazy"
                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 opacity-100">
 
             {{-- Video --}}
@@ -32,25 +32,25 @@
             @endif
 
             {{-- Gradient Overlay --}}
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
 
             {{-- Gradient Overlay (top + bottom) --}}
             <div class="absolute inset-0 pointer-events-none">
 
 
                 <!-- Bottom blur/fade -->
-                <div class="absolute bottom-0 left-0 w-full h-15 bg-gradient-to-t from-[#181818] to-transparent ">
+                <div class="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-[#181818] to-transparent ">
                 </div>
             </div>
 
             {{-- Title and Buttons --}}
             <div class="absolute bottom-20 left-15 z-10 transition-opacity duration-700 opacity-100">
-                <img src="{{ asset('storage/' . $featured->title_poster) }}" alt="{{ $featured->title }}" id="modalTitlePoster"
+                <img src="{{ asset('storage/' . $featured->title_poster) }}" alt="{{ $featured->title }}" id="modalTitlePoster" loading="lazy"
                     class="mb-6 w-[300px] h-auto object-contain transition-all duration-700">
 
                 <div class="flex items-center space-x-4 mt-4">
                     <button
-                        class="flex items-center justify-center space-x-2 bg-white text-black font-bold w-[126px] h-[46px] !rounded-md hover:bg-gray-300 transition duration-300">
+                        class="flex items-center justify-center space-x-2 bg-white text-black font-bold w-[126px] h-[46px] rounded-md! hover:bg-gray-300 transition duration-300">
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
                             <path
                                 d="M5 2.69127C5 1.93067 5.81547 1.44851 6.48192 1.81506L23.4069 11.1238C24.0977 11.5037 24.0977 12.4963 23.4069 12.8762L6.48192 22.1849C5.81546 22.5515 5 22.0693 5 21.3087V2.69127Z"
@@ -61,7 +61,7 @@
 
                     <!-- Add to List -->
                     <button
-                        class="flex items-center justify-center w-[46px] h-[46px] !rounded-full bg-[#2a2a2a99] hover:bg-[Transparent] hover:border-[#ffffff] text-white transition duration-300 border-2 border-[#ffffff80]">
+                        class="flex items-center justify-center w-[46px] h-[46px] rounded-full! bg-[#2a2a2a99] hover:bg-[Transparent] hover:border-[#ffffff] text-white transition duration-300 border-2 border-[#ffffff80]">
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M11 11V2H13V11H22V13H13V22H11V13H2V11H11Z" />
@@ -70,7 +70,7 @@
 
                     <!-- Thumbs Up -->
                     <button
-                        class="flex items-center justify-center w-[46px] h-[46px] !rounded-full bg-[#2a2a2a99] hover:bg-[Transparent] hover:border-[#ffffff] text-white transition duration-300 border-2 border-[#ffffff80]">
+                        class="flex items-center justify-center w-[46px] h-[46px] rounded-full! bg-[#2a2a2a99] hover:bg-[Transparent] hover:border-[#ffffff] text-white transition duration-300 border-2 border-[#ffffff80]">
                         <svg viewBox="0 0 24 24" width="24" height="24" data-icon="ThumbsUpMedium" data-icon-id=":ra8:"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" role="img">
                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -86,7 +86,7 @@
 
         <!-- Movie Details -->
         <div
-            class="pt-0 px-10 pb-10 bg-gradient-to-t from-[#181818] via-[#181818]/80 to-transparent  relative rounded-t-3xl">
+            class="pt-0 px-10 pb-10 bg-linear-to-t from-[#181818] via-[#181818]/80 to-transparent  relative rounded-t-3xl">
             <div class="grid grid-cols-3 gap-8">
                 <!-- Left Column -->
                 <div class="col-span-2 ">
@@ -158,7 +158,7 @@
                             class="bg-[#2f2f2f] rounded overflow-hidden group relative hover:scale-[1.03] transition-transform duration-300">
                             <div class="relative">
                                 @if($poster)
-                                    <img src="{{ $poster }}" alt="{{ $video->title }}" class="w-full h-40 object-cover">
+                                    <img src="{{ $poster }}" alt="{{ $video->title }}" loading="lazy" class="w-full h-40 object-cover">
                                 @else
                                     <div class="w-full h-40 bg-gray-700 flex items-center justify-center text-gray-400">
                                         No Image
@@ -179,7 +179,7 @@
 
                                     {{-- Add / Remove My List --}}
                                     <button
-                                        class="toggle-mylist flex items-center justify-center w-8 h-8 !rounded-full border-2 border-gray-400 bg-black/50 hover:bg-white/20 text-white transition"
+                                        class="toggle-mylist flex items-center justify-center w-8 h-8 rounded-full! border-2 border-gray-400 bg-black/50 hover:bg-white/20 text-white transition"
                                         data-video-id="{{ $video->id }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor" id="mylist-icon-{{ $video->id }}">
@@ -217,7 +217,7 @@
         <!-- Divider with chevron -->
         <div class="flex justify-center py-2 bg-[#181818]">
             <button
-                class="flex items-center justify-center w-10 h-10 !rounded-full border-2 border-gray-600 bg-transparent hover:border-white text-white transition">
+                class="flex items-center justify-center w-10 h-10 rounded-full! border-2 border-gray-600 bg-transparent hover:border-white text-white transition">
                 <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
                     <path d="M12 15.5L6.5 10L7.91 8.59L12 12.67L16.09 8.59L17.5 10L12 15.5Z"></path>
                 </svg>
@@ -231,10 +231,10 @@
             <div class="mb-8">
                 <div
                     class="relative rounded overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300 inline-block">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=220&h=124&fit=crop"
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=220&h=124&fit=crop" loading="lazy"
                         alt="Trailer" class="w-56 h-32 object-cover">
                     <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                        <div class="w-12 h-12 !rounded-full border-2 border-white flex items-center justify-center">
+                        <div class="w-12 h-12 rounded-full! border-2 border-white flex items-center justify-center">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="white" class="ml-1">
                                 <path d="M8 5v14l11-7z"></path>
                             </svg>

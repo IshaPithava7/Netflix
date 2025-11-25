@@ -3,29 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ToggleRequest;
-use Illuminate\Http\Request;
-use App\Models\Video;
 use Illuminate\Support\Facades\Auth;
+use App\Services\MyListService;
 
 class MyListController extends Controller
 {
+    protected $myListService;
+
+    public function __construct(MyListService $myListService)
+    {
+        $this->myListService = $myListService;
+    }
 
     /**
      * Toggle a video in or out of the user's "My List".
      */
-    public function toggle(ToggleRequest $ToggleRequest)
+    public function toggle(ToggleRequest $request)
     {
-        $videoId = $ToggleRequest->validated();
-
-        $user = Auth::user();
-        $status = $user->myList()->toggle($videoId);
-
-        return response()->json([
-            'status' => !empty($status['attached']) ? 'added' : 'removed'
-
-        ]);
+        $status = $this->myListService->toggleVideo($request->validated()['video_id'], Auth::user());
+        return response()->json(['status' => $status]);
     }
-
 
     /**
      * Display all videos in the authenticated user's "My List".
@@ -33,14 +30,8 @@ class MyListController extends Controller
     public function mylist()
     {
         $user = Auth::user();
-
-        //  Eager load all necessary relationships to prevent lazy loading
-        $videos = $user->myListVideos()
-            ->with(['types:id,name'])
-            ->get(['videos.id', 'videos.title', 'videos.poster', 'videos.file_path', 'videos.title_poster', 'videos.description']);
-
-        // Preload all My List video IDs once
-        $myListIds = $videos->pluck('id')->flip()->toArray(); // flip for quick lookup
+        $videos = $this->myListService->getUserList($user);
+        $myListIds = $videos->pluck('id')->flip()->toArray();
 
         return view('mylist.mylist', compact('videos', 'user', 'myListIds'));
     }

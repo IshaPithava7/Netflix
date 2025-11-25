@@ -1,6 +1,6 @@
 <x-layouts.app>
 
-@section('content')
+    @section('content')
     <div class="flex bg-gray-900 text-white w-auto">
         {{-- Main Content --}}
         <main class="flex-1 p-6 overflow-y-auto">
@@ -36,47 +36,7 @@
                 <canvas id="topVideosChart" class="w-full h-64"></canvas>
             </div>
 
-            {{-- Chart JS Script --}}
-            <script>
-                const ctx1 = document.getElementById('watchHistoryChart').getContext('2d');
-                new Chart(ctx1, {
-                    type: 'line',
-                    data: {
-                        labels: {!! json_encode($chartLabels) !!},
-                        datasets: [{
-                            label: 'Video Views',
-                            data: {!! json_encode($chartData) !!},
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 2,
-                            tension: 0.3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: true } }
-                    }
-                });
-
-                const ctx2 = document.getElementById('topVideosChart').getContext('2d');
-                new Chart(ctx2, {
-                    type: 'bar',
-                    data: {
-                        labels: {!! json_encode($topVideoTitles->values()) !!},
-                        datasets: [{
-                            label: 'Views',
-                            data: {!! json_encode($topVideoData) !!},
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true } }
-                    }
-                });
-            </script>
-
+       
             {{-- Latest Users & Videos --}}
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
 
@@ -93,11 +53,11 @@
                         </thead>
                         <tbody>
                             @foreach($latestUsers as $user)
-                                <tr class="hover:bg-gray-700">
-                                    <td class="py-2">{{ $user->name }}</td>
-                                    <td class="py-2">{{ $user->email }}</td>
-                                    <td class="py-2">{{ $user->created_at->format('M d, Y') }}</td>
-                                </tr>
+                            <tr class="hover:bg-gray-700">
+                                <td class="py-2">{{ $user->name }}</td>
+                                <td class="py-2">{{ $user->email }}</td>
+                                <td class="py-2">{{ $user->created_at->format('M d, Y') }}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -116,11 +76,11 @@
                         </thead>
                         <tbody>
                             @foreach($latestVideos as $video)
-                                <tr class="hover:bg-gray-700">
-                                    <td class="py-2">{{ $video->title }}</td>
-                                    <td class="py-2">{{ $video->uploader->name }}</td>
-                                    <td class="py-2">{{ $video->created_at->format('M d, Y') }}</td>
-                                </tr>
+                            <tr class="hover:bg-gray-700">
+                                <td class="py-2">{{ $video->title }}</td>
+                                <td class="py-2">{{ $video->uploader->name }}</td>
+                                <td class="py-2">{{ $video->created_at->format('M d, Y') }}</td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -131,6 +91,6 @@
 
         </main>
     </div>
-@endsection
+    @endsection
 
 </x-layouts.app>

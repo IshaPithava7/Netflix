@@ -103,8 +103,8 @@
 
 <section class="absolute bottom-0 left-0 w-full pl-5 z-10 bg-transparent top10-swiper">
     <h2 class="text-2xl font-bold mb-4 text-white pl-10">Top 10 Shows in India Today</h2>
-    <div class="swiper top10Swiper !overflow-visible">
-        <div class="swiper-wrapper !overflow-visible">
+    <div class="swiper top10Swiper overflow-visible!">
+        <div class="swiper-wrapper overflow-visible!">
             @if($top10Collection && $top10Collection->videos->isNotEmpty())
                 @foreach($top10Collection->videos->take(10) as $video)
                     @php
@@ -115,7 +115,7 @@
                         $rankNumber = $loop->iteration;
                     @endphp
                     <div
-                        class="swiper-slide relative flex items-end top10-slide-group z-50 hover:z-[99999] transition-all duration-200 ease-in-out">
+                        class="swiper-slide relative flex items-end top10-slide-group z-50 hover:z-99999 transition-all duration-200 ease-in-out">
                         {{-- Rank Number --}}
                         <div class="top10-rank-number">
                             <svg viewBox='0 0 180 280'>
@@ -133,7 +133,7 @@
                                     <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
                                 </video>
                             @elseif($poster)
-                                <img src="{{ $poster }}" alt="{{ $video->title }}" class="w-full h-full object-cover">
+                                <img src="{{ $poster }}" alt="{{ $video->title }}" loading="lazy" class="w-full h-full object-cover">
                             @endif
                         </div>
 
@@ -147,7 +147,7 @@
                                         <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
                                     </video>
                                 @elseif($poster)
-                                    <img src="{{ $poster }}" alt="{{ $video->title }}"
+                                    <img src="{{ $poster }}" alt="{{ $video->title }}" loading="lazy"
                                         class="w-full h-[180px] object-cover rounded-t-lg">
                                 @endif
 
@@ -157,7 +157,7 @@
 
                                 {{-- Title poster in bottom-left --}}
                                 @if($video->title_poster)
-                                    <img src="{{ asset('storage/' . $video->title_poster) }}" alt="{{ $video->title }}"
+                                    <img src="{{ asset('storage/' . $video->title_poster) }}" alt="{{ $video->title }}" loading="lazy"
                                         class="absolute bottom-2 left-5 w-auto h-12 object-contain rounded-md shadow-md drop-shadow-lg">
                                 @endif
                             </div>
@@ -201,7 +201,7 @@
                                     </button>
 
                                     <button
-                                        class="top10-chevron-down border-2 border-gray-500 text-white !rounded-full w-9 h-9 flex items-center justify-center hover:border-white hover:bg-gray-700 transition">
+                                        class="top10-chevron-down border-2 border-gray-500 text-white rounded-full! w-9 h-9 flex items-center justify-center hover:border-white hover:bg-gray-700 transition">
                                         <i class="fa-solid fa-chevron-down text-sm"></i>
                                     </button>
                                 </div>

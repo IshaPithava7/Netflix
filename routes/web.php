@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\browseBylanguageController;
+use App\Http\Controllers\NewAndPopularController;
+use App\Http\Controllers\ShowsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
@@ -9,8 +12,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\MyListController;
+use App\Http\Controllers\NewAndPopular;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\GithubController;
+use App\Http\Controllers\Auth\TwitterController;
+use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\Auth\SlackController;
+use App\Http\Controllers\Auth\LinkedinController;
 
 
 $middlewares = env('IS_ENCRYPTION', false) ? ['auth', 'decrypt.request', 'encrypt.response'] : ['auth'];
@@ -22,6 +32,39 @@ $middlewares = env('IS_ENCRYPTION', false) ? ['auth', 'decrypt.request', 'encryp
 */
 
 Route::get('/', [HomeController::class, 'dashboard'])->name('dashboard');
+
+
+
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle'])
+    ->name('auth.google');
+
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])
+    ->name('auth.google.callback');
+
+
+Route::get('/auth/github', [GithubController::class, 'redirectToGithub'])->name('github.login');
+Route::get('/auth/github/callback', [GithubController::class, 'handleGithubCallback']);
+
+Route::get('/auth/twitter', [TwitterController::class, 'redirectToTwitter'])
+    ->name('auth.twitter');
+
+Route::get('/auth/twitter/callback', [TwitterController::class, 'handleTwitterCallback'])
+    ->name('auth.twitter.callback');
+
+Route::get('login/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('login/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+
+Route::post('/facebook/data-deletion', [FacebookController::class, 'facebookDataDeletion']);
+Route::get('/deletion-confirmation', function () {
+    return 'Your data has been deleted successfully.';
+});
+
+Route::get('login/slack', [SlackController::class, 'redirectToSlack'])->name('login.slack');
+Route::get('login/slack/callback', [SlackController::class, 'handleSlackCallback']);
+
+Route::get('login/linkedin', [LinkedinController::class, 'redirectToLinkedIn'])->name('login.linkedin');
+Route::get('login/linkedin/callback', [LinkedinController::class, 'handleLinkedInCallback']);
+
 
 // Auth
 Route::controller(AuthController::class)->group(function () {
@@ -93,7 +136,7 @@ Route::middleware($middlewares)->group(function () {
 
         Route::get('/', [PaymentController::class, 'show'])->name('index');
 
-        Route::post('/select-plan', [PaymentController::class, 'selectPlan'])->name('select');
+        Route::get('/select-plan', [PaymentController::class, 'selectPlan'])->name('select');
         Route::get('/payment/{priceId}', [PaymentController::class, 'showPayment'])->name('payment');
 
         Route::post('/subscribe', [PaymentController::class, 'subscribe'])->name('subscribe');
@@ -126,11 +169,13 @@ Route::middleware($middlewares)->group(function () {
     | Pages
     |--------------------------------------------------------------------------
     */
-    Route::view('/shows', 'home.shows')->name('shows');
+    Route::get('/shows', [ShowsController::class, 'Shows'])->name('shows');
     Route::view('/games', 'home.games')->name('games.index');
-    Route::view('/new-popular', 'home.new-popular')->name('newpopular');
-    Route::view('/browse-languages', 'home.browse-languages')->name('browse.languages');
-    Route::get('/movies', [MoviesController::class, 'index'])->name('movies');
+
+    Route::get('/new-popular', [NewAndPopularController::class, 'newAndPopular'])->name('newpopular');
+
+    Route::get('/browse-languages', [browseBylanguageController::class, 'browseBylanguage'])->name('browse.languages');
+    Route::get('/movies', [MoviesController::class, 'movies'])->name('movies');
 
     /*
     |--------------------------------------------------------------------------

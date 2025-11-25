@@ -11,6 +11,7 @@ Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard
 
 Route::get('/users/list', [AdminController::class, 'users'])->name('users');
 
+Route::get('/videos/list', [VideoController::class, 'videos'])->name('videos');
 // Users (full CRUD)
 Route::resource('users', UserController::class);
 
@@ -18,4 +19,3 @@ Route::resource('users', UserController::class);
 Route::resource('videos', VideoController::class);
 
 Route::get('/main_dashboard', [AdminController::class, 'main_dashboard'])->name('main_dashboard');
-

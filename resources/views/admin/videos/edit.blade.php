@@ -132,7 +132,7 @@
                     <label for="title_poster" class="block text-sm font-medium mb-1">Title Poster</label>
                     @if($video->title_poster)
                         <div class="mb-2">
-                            <img src="{{ asset('storage/' . $video->title_poster) }}" alt="Title Poster"
+                            <img src="{{ asset('storage/' . $video->title_poster) }}" alt="Title Poster" loading="lazy"
                                 class="w-40 h-24 object-cover rounded">
                         </div>
                     @endif
@@ -141,7 +141,7 @@
                     <p class="text-gray-400 text-xs mt-1">Leave empty if you don’t want to change the poster.</p>
                     <div id="title-poster-preview-container" class="mt-2 {{ $video->title_poster ? '' : 'hidden' }}">
                         <p class="text-white font-semibold mb-1">Title Poster Preview:</p>
-                        <img id="title-poster-preview" class="w-40 h-24 object-cover rounded"
+                        <img id="title-poster-preview" class="w-40 h-24 object-cover rounded" loading="lazy"
                             src="{{ $video->title_poster ? asset('storage/' . $video->title_poster) : '' }}"
                             alt="Title Poster Preview">
                     </div>
@@ -152,7 +152,7 @@
                     <label for="poster" class="block text-sm font-medium mb-1">Poster</label>
                     @if($video->poster)
                         <div class="mb-2">
-                            <img src="{{ asset('storage/' . $video->poster) }}" alt="Poster"
+                            <img src="{{ asset('storage/' . $video->poster) }}" alt="Poster" loading="lazy"
                                 class="w-40 h-24 object-cover rounded">
                         </div>
                     @endif
@@ -161,7 +161,7 @@
                     <p class="text-gray-400 text-xs mt-1">Leave empty if you don’t want to change the poster.</p>
                     <div id="poster-preview-container" class="mt-2 {{ $video->poster ? '' : 'hidden' }}">
                         <p class="text-white font-semibold mb-1">Poster Preview:</p>
-                        <img id="poster-preview" class="w-40 h-24 object-cover rounded"
+                        <img id="poster-preview" class="w-40 h-24 object-cover rounded" loading="lazy"
                             src="{{ $video->poster ? asset('storage/' . $video->poster) : '' }}" alt="Poster Preview">
                     </div>
                 </div>

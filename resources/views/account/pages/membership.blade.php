@@ -126,7 +126,7 @@
                 <div class="text-center py-8 bg-white border border-gray-200 rounded-lg">
                     <p class="text-gray-600 mb-4">No active subscription.</p>
                     <a href="{{ route('subscription') }}"
-                        class="inline-block bg-red-600 text-white px-6 py-3 rounded font-semibold hover:bg-red-700 transition !no-underline">
+                        class="inline-block bg-red-600 text-white px-6 py-3 rounded font-semibold hover:bg-red-700 transition no-underline!">
                         Subscribe Now
                     </a>
                 </div>

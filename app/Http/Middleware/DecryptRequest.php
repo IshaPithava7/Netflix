@@ -15,43 +15,45 @@ class DecryptRequest
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if ($request->getContent()) {
-            $encryptedData = $request->getContent();
+        $raw = $request->getContent();
 
-            try {
-                $secretKey = base64_decode(config('app.encryption_key'));
-                $iv = base64_decode(config('app.encryption_iv'));
-                $algorithm = env('ALGORITHM', 'aes-256-cbc');
+        // If empty or not hex → skip decryption
+        if (empty($raw) || !ctype_xdigit($raw) || $request->header('X-Skip-Decrypt')) {
+            return $next($request);
+        }
 
+        try {
 
-                if (strlen($secretKey) !== 32) {
-                    throw new Exception('Secret key must be 32 bytes, got ' . strlen($secretKey));
-                }
-                if (strlen($iv) !== 16) {
-                    throw new Exception('IV must be 16 bytes, got ' . strlen($iv));
-                }
+            $secretKey = base64_decode(config('app.encryption_key'));
+            $iv = base64_decode(config('app.encryption_iv'));
+            $algorithm = env('ALGORITHM', 'aes-256-cbc');
 
+            $raw = hex2bin($raw);
 
-                // Convert encrypted hex to binary
-                $encryptedData = hex2bin($encryptedData);
+            $decrypted = openssl_decrypt(
+                $raw,
+                $algorithm,
+                $secretKey,
+                OPENSSL_RAW_DATA,
+                $iv
+            );
 
-                // Decrypt
-                $decrypted = openssl_decrypt($encryptedData, $algorithm, $secretKey, OPENSSL_RAW_DATA, $iv);
+            $data = json_decode($decrypted, true);
 
-                if ($decrypted === false) {
-                    Log::error('Decryption failed.');
-                }
+            $request->replace($data);
 
-                $decryptedData = json_decode($decrypted, true);
+        } catch (\Exception $e) {
+            Log::error('Decrypt error: ' . $e->getMessage());
 
-                $request->replace($decryptedData);
-            } catch (Exception $error) {
-                Log::error('Error during decryption: ' . $error->getMessage());
-            }
+            // Do NOT modify request body — just continue
+            return $next($request);
         }
 
         return $next($request);
     }
+
+
+
 }

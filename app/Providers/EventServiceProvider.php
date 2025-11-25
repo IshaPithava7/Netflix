@@ -11,6 +11,9 @@ class EventServiceProvider extends ServiceProvider
         \App\Events\UserRegistered::class => [
             \App\Listeners\SendWelcomeEmail::class,
         ],
+        SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            'SocialiteProviders\\LinkedIn\\OpenID\\LinkedInExtendSocialite@handle',
+        ],
     ];
 
     public function boot(): void

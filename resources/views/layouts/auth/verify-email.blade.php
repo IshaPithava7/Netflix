@@ -5,7 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Isha Pithava" content="netflix-clone">
     <title>Verify Email • {{ config('app.name') }}</title>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
@@ -14,18 +17,15 @@
 
     <!-- Background overlays -->
     <div class="absolute w-full h-full bg-black/70 -z-10"></div>
-    <div
-        class="absolute w-full h-full bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/151f3e1e-b2c9-4626-afcd-6b39d0b2694f/web/IN-en-20241028-TRIFECTA-perspective_bce9a321-39cb-4cce-8ba6-02dab4c72e53_large.jpg')] bg-cover bg-center -z-20">
+    <div class="absolute w-full h-full bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/151f3e1e-b2c9-4626-afcd-6b39d0b2694f/web/IN-en-20241028-TRIFECTA-perspective_bce9a321-39cb-4cce-8ba6-02dab4c72e53_large.jpg')] bg-cover bg-center -z-20">
     </div>
 
     <!-- Top-right Sign In button -->
     <div class="absolute top-8 right-8 z-50 bg-white">
-        <a href="{{ route('login') }}"
-            class="bg-red-600  hover:bg-red-700 !no-underline text-white px-4 py-2 rounded font-semibold transition ">
+        <a href="{{ route('login') }}" class="bg-red-600  hover:bg-red-700 !no-underline text-white px-4 py-2 rounded font-semibold transition ">
             Sign In
         </a>
     </div>
-
 
     <div class="flex justify-center items-center h-screen px-4">
         <div class="bg-black/80 p-10 rounded max-w-md w-full z-10">
@@ -38,22 +38,22 @@
             </p>
 
             @if (session('message'))
-                <div class="bg-green-600 p-2 mb-4 rounded text-sm">
-                    {{ session('message') }}
-                </div>
+            <div class="bg-green-600 p-2 mb-4 rounded text-sm">
+                {{ session('message') }}
+            </div>
             @endif
 
             @if (session('status') === 'verification-link-sent')
-                <div class="bg-green-600 p-2 mb-4 rounded text-sm">
-                    A fresh verification link has been sent to your email address.
-                </div>
+            <div class="bg-green-600 p-2 mb-4 rounded text-sm">
+                A fresh verification link has been sent to your email address.
+            </div>
             @endif
 
             <!-- Display User Email for Admins -->
             @can('isAdmin')
-                <div class="bg-[#333] p-3 rounded mb-4 text-gray-200">
-                    {{ auth()->user()->email }}
-                </div>
+            <div class="bg-[#333] p-3 rounded mb-4 text-gray-200">
+                {{ auth()->user()->email }}
+            </div>
             @endcan
 
             <!-- Resend Verification Email -->
@@ -75,10 +75,8 @@
             <p class="text-gray-400 mt-4 text-sm text-center">
                 Back to <a href="{{ route('dashboard') }}" class="text-white hover:underline">Dashboard</a>
             </p>
-
         </div>
     </div>
-
 </body>
 
 </html>

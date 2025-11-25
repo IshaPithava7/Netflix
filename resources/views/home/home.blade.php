@@ -139,96 +139,42 @@
                 @if($heroCollection && $heroCollection->videos->isNotEmpty())
                     @php
                         $featured = $heroCollection->videos->first();
-                        $poster = $featured->poster;
-                        if ($poster && !filter_var($poster, FILTER_VALIDATE_URL)) {
-                            $poster = asset('storage/' . $poster);
-                        }
-
-                        $titlePoster = $featured->title_poster;
-                        if ($titlePoster && !filter_var($titlePoster, FILTER_VALIDATE_URL)) {
-                            $titlePoster = asset('storage/' . $titlePoster);
-                        }
+                        $poster = $featured->poster ? (filter_var($featured->poster, FILTER_VALIDATE_URL) ? $featured->poster : asset('storage/' . $featured->poster)) : '';
+                        $titlePoster = $featured->title_poster ? asset('storage/' . $featured->title_poster) : '';
                     @endphp
 
-                    <section class="relative mb-12">
+                    <section class="relative h-[56.25vw] min-h-[400px] max-h-[800px] mb-12">
+                        @if($featured->file_path)
+                            <video id="heroVideo" poster="{{ $poster }}" class="absolute top-0 left-0 w-full h-full object-cover" autoplay muted loop>
+                                <source src="{{ asset('storage/' . $featured->file_path) }}" type="video/mp4">
+                            </video>
+                        @else
+                            <img id="heroPoster" src="{{ $poster }}" alt="{{ $featured->title }}" class="absolute top-0 left-0 w-full h-full object-cover">
+                        @endif
 
-                        <div class="relative w-full h-[800px] overflow-hidden shadow-2xl">
-                            <!-- Poster -->
-                            <img id="heroPoster" src="{{ $poster }}" alt="{{ $featured->title }}"
-                                class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 opacity-100"
-                                fetchpriority="high">
+                        <div class="absolute inset-0 bg-linear-to-t from-[#141414] via-transparent to-transparent"></div>
 
-                            <!-- Video -->
-                            @if($featured->file_path)
-                                <video id="heroVideo"
-                                    class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-700"
-                                    muted playsinline preload="auto" poster="{{ $poster }}">
-                                    <source src="{{ asset('storage/' . $featured->file_path) }}" type="video/mp4">
-                                </video>
+                        <div class="absolute bottom-[20%] left-[4%] z-10">
+                            @if($titlePoster)
+                                <img src="{{ $titlePoster }}" alt="{{ $featured->title }}" class="w-[40%] max-w-[500px] h-auto mb-6 transform transition-transform duration-500 ease-in-out scale-100 hover:scale-105">
+                            @else
+                                <h1 class="text-6xl font-bebas text-white mb-6">{{ $featured->title }}</h1>
                             @endif
 
-                            {{-- Overlay --}}
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <p class="text-white text-lg max-w-lg mb-6 shadow-lg">{{ $featured->description }}</p>
 
-                            <div class="absolute inset-0 pointer-events-none">
-
-                                <!-- Bottom blur/fade -->
-                                <div
-                                    class="absolute bottom-0 left-0 w-full h-15 bg-gradient-to-t from-[#181818] to-transparent ">
-                                </div>
-                            </div>
-
-                            {{-- Text --}}
-                            <div class="absolute bottom-75 left-15 z-10 transition-opacity duration-700 opacity-100">
-                                <img src="{{ asset('storage/' . $featured->title_poster) }}" alt="{{ $featured->title }}"
-                                    id="titlePoster" class="mb-4 w-[500px] h-auto object-contain transition-all duration-700">
-                                <p id="heroText" class="text-white font-medium max-w-lg mb-6 font-open-sans">
-                                    {{ $featured->description }}
-                                </p>
-
-                                <!-- Buttons -->
-                                <div class="flex space-x-4">
-                                    <button
-                                        class="bg-[#FFFFFF] text-black font-bold w-[126px] h-[46px] !rounded-md justify-center hover:bg-[#C3C1C1] transition duration-300 flex items-center space-x-2">
-                                        <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
-                                            <path
-                                                d="M5 2.69127C5 1.93067 5.81547 1.44851 6.48192 1.81506L23.4069 11.1238C24.0977 11.5037 24.0977 12.4963 23.4069 12.8762L6.48192 22.1849C5.81546 22.5515 5 22.0693 5 21.3087V2.69127Z"
-                                                fill="currentColor"></path>
-                                        </svg>
-                                        <video id="heroVideo"
-                                            class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-700"
-                                            muted playsinline preload="auto" poster="{{ $poster }}">
-                                            <source src="{{ asset('storage/' . $featured->file_path) }}" type="video/mp4">
-                                        </video>
-                                        <span>Play</span>
-                                    </button>
-
-                                    <!-- hero banner -->
-                                    <button id="moreInfoBtn"
-                                        class=" bg-[#6d6d6e] mr-0.5 !text-[#ffffff] opacity-[0.7] font-bold w-[172px] h-[46px] !rounded-md justify-center hover:bg-[#403A36] transition duration-300 flex items-center space-x-2"
-                                        data-video-id="{{ $featured->id }}" data-title="{{ $featured->title }}"
-                                        data-description="{{ $featured->description }}"
-                                        data-duration="{{ $featured->duration ?? '1h 52m' }}" data-poster="{{ $poster }}"
-                                        data-file="{{ $featured->file_path ? asset('storage/' . $featured->file_path) : '' }}"
-                                        data-title-poster="{{ $featured->title_poster ? asset('storage/' . $featured->title_poster) : '' }}"
-                                        data-genres="{{ $additionalSection['metadata']['genre'] ?? 'Drama • Action' }}">
-                                        <svg viewBox="0 0 24 24" width="24" height="24" data-icon="CircleIMedium"
-                                            data-icon-id=":r25:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            fill="none" role="img">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12ZM13 10V18H11V10H13ZM12 8.5C12.8284 8.5 13.5 7.82843 13.5 7C13.5 6.17157 12.8284 5.5 12 5.5C11.1716 5.5 10.5 6.17157 10.5 7C10.5 7.82843 11.1716 8.5 12 8.5Z"
-                                                fill="currentColor"></path>
-
-                                        </svg>
-                                        <span class="!text-[#ffffff]">More Info</span>
-                                    </button>
-                                </div>
+                            <div class="flex space-x-4">
+                                <a href="#" class="flex items-center justify-center bg-white text-black font-bold px-8 py-3 rounded hover:bg-gray-200 transition-colors duration-300">
+                                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                    <span>Play</span>
+                                </a>
+                                <button id="moreInfoBtn" class="flex items-center justify-center bg-gray-500 bg-opacity-70 text-white font-bold px-8 py-3 rounded hover:bg-gray-600 transition-colors duration-300"
+                                    data-video-id="{{ $featured->id }}">
+                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>More Info</span>
+                                </button>
                             </div>
                         </div>
-
-
-                        {{-- Top 10 Shows Section --}}
-                        @include('home.top_10.top_10_shows')
                     </section>
                 @endif
 
@@ -282,34 +228,7 @@
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
-
             $(document).ready(function () {
-
-                /* ===============================
-                    HERO ANIMATION
-                   =============================== */
-                const $heroVideo = $("#heroVideo");
-                const $heroPoster = $("#heroPoster");
-                const $heroText = $("#heroText");
-                const $titlePoster = $("#titlePoster");
-
-                if ($heroVideo.length && $heroPoster.length && $heroText.length && $titlePoster.length) {
-                    setTimeout(() => {
-                        $titlePoster.removeClass("w-[500px]").addClass("w-[300px] transition-all duration-700");
-                        $heroPoster.addClass("opacity-0");
-                        $heroText.hide();
-                        $heroVideo.removeClass("opacity-0").get(0).play();
-                    }, 5000);
-
-                    $heroVideo.on("ended", function () {
-                        $heroVideo.addClass("opacity-0");
-                        $heroPoster.removeClass("opacity-0");
-                        $titlePoster.removeClass("w-[300px]").addClass("w-[500px]");
-                        $heroText.show();
-                    });
-                }
-
-
                 /* ===============================
                     MODAL BEHAVIOR
                    =============================== */
@@ -345,7 +264,7 @@
                     $moreInfoBtn.on("click", function () {
                         $modal.removeClass("opacity-0 pointer-events-none").addClass("opacity-100");
                         $('body').css('overflow', 'hidden');
-                        if ($heroVideo.length) $heroVideo.get(0).pause();
+                        if ($("#heroVideo").length) $("#heroVideo").get(0).pause();
                         playModalVideo();
                     });
 
@@ -354,7 +273,7 @@
                         $modal.addClass("opacity-0 pointer-events-none").removeClass("opacity-100");
                         $('body').css('overflow', 'auto');
                         $modalVideo.get(0).pause();
-                        if ($heroVideo.length) $heroVideo.get(0).play();
+                        if ($("#heroVideo").length) $("#heroVideo").get(0).play();
                     });
 
                     // CLICK OUTSIDE MODAL TO CLOSE
@@ -363,7 +282,7 @@
                             $modal.addClass("opacity-0 pointer-events-none").removeClass("opacity-100");
                             $('body').css('overflow', 'auto');
                             $modalVideo.get(0).pause();
-                            if ($heroVideo.length) $heroVideo.get(0).play();
+                            if ($("#heroVideo").length) $("#heroVideo").get(0).play();
                         }
                     });
                 }

@@ -13,7 +13,7 @@
             <div class="bg-white border border-gray-200 rounded-lg mb-4">
                 {{-- Password --}}
                 <div class="p-6 border-b border-gray-200">
-                    <a href="{{ route('password.edit') }}" class="flex items-center justify-between w-full text-left group !no-underline">
+                    <a href="{{ route('password.edit') }}" class="flex items-center justify-between w-full text-left group no-underline!">
                         <div class="flex items-center gap-4">
                             <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

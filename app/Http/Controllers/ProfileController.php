@@ -3,34 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProfileRequest;
-use App\Models\Profile;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Services\ProfileService;
+
 class ProfileController extends Controller
 {
+    protected $profileService;
+
+    public function __construct(ProfileService $profileService)
+    {
+        $this->profileService = $profileService;
+    }
 
     /**
      * Store a new user profile.
      */
-    public function store(StoreProfileRequest $StoreProfileRequest)
+    public function store(StoreProfileRequest $request)
     {
-        $data = $StoreProfileRequest->validated();
-
-        // Handle avatar upload (if present)
-        $avatarPath = null;
-
-        if ($StoreProfileRequest->hasFile('avatar')) {
-            $avatarPath = $StoreProfileRequest->file('avatar')->store('avatars', 'public');
-        }
-
-        // Create the profile
-        Auth::user()->profiles()->create([
-            'name'   => $data['name'],
-            'avatar' => $avatarPath,
-            'type'   => $data['type'] ?? 'general',
-        ]);
-
+        $this->profileService->createProfile($request, $request->validated());
         return back()->with('success', 'Profile added successfully!');
     }
-
 }
