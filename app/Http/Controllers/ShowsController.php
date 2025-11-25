@@ -14,7 +14,8 @@ class ShowsController extends Controller
     {
         $user = Auth::user();
 
-        $collectionGenre = Type::pluck('name');
+        $genres = Type::pluck('name')->toArray();
+        $collectionGenre = array_chunk($genres, ceil(count($genres) / 3));
 
         $localVideos = Video::select([
             'id',

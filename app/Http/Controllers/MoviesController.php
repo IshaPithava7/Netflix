@@ -33,14 +33,8 @@ class MoviesController extends Controller
             ->orderBy('id', 'asc')
             ->get();
 
-        $collectionGenre = Type::with([
-            'videos' => function ($q) {
-                $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');
-            }
-        ])
-            ->has('videos')
-            ->orderBy('name', 'asc')
-            ->get();
+        $genres = Type::pluck('name')->toArray();
+        $collectionGenre = array_chunk($genres, ceil(count($genres) / 3));
 
 
 

@@ -158,8 +158,8 @@
                                 </h1>
 
                                 <!-- Genres Dropdown (Real Netflix Style) -->
-                                <div class="relative group inline-block">
-                                    <button
+                                <div id="genres-dropdown" class="relative inline-block">
+                                    <button id="genres-button"
                                         class="flex items-center bg-black border border-gray-500 p-1 text-white font-medium hover:border-white transition">
                                         <span>Genres</span>
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -168,14 +168,18 @@
                                                 clip-rule="evenodd"></path>
                                         </svg>
                                     </button>
-                                    <div
-                                        class="absolute right-0 mt-2 w-64 bg-black border border-gray-700 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                        <div class="py-2 max-h-80 overflow-y-auto">
-                                            @foreach($collectionGenre as $collectionTitle)
-                                                <a href="#"
-                                                    class="block px-6 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition">
-                                                    {{ $collectionTitle }}
-                                                </a>
+                                    <div id="genres-menu"
+                                        class="absolute left-0 mt-2 w-[700px] bg-black bg-opacity-90 border border-gray-700 rounded-md shadow-2xl transition-all duration-300 z-50 opacity-0 invisible p-6">
+                                        <div class="grid grid-cols-3 gap-x-8 gap-y-2">
+                                            @foreach($collectionGenre as $column)
+                                                <div class="flex flex-col space-y-2">
+                                                    @foreach($column as $genre)
+                                                        <a href="#"
+                                                            class="text-gray-300! no-underline! hover:underline whitespace-nowrap">
+                                                            {{ $genre }}
+                                                        </a>
+                                                    @endforeach
+                                                </div>
                                             @endforeach
                                         </div>
                                     </div>
@@ -310,6 +314,26 @@
         @include('home.models.more_info_model')
         @include('home.models.section_more_info_model')
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const genresButton = document.getElementById('genres-button');
+                const genresMenu = document.getElementById('genres-menu');
+
+                if (genresButton && genresMenu) {
+                    genresButton.addEventListener('click', function (event) {
+                        event.stopPropagation();
+                        genresMenu.classList.toggle('opacity-0');
+                        genresMenu.classList.toggle('invisible');
+                    });
+
+                    document.addEventListener('click', function (event) {
+                        if (!genresMenu.contains(event.target) && !genresButton.contains(event.target)) {
+                            genresMenu.classList.add('opacity-0', 'invisible');
+                        }
+                    });
+                }
+            });
+        </script>
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
@@ -339,7 +363,6 @@
                         $heroText.show();
                     });
                 }
-
 
                 /* ===============================
                     MODAL BEHAVIOR
@@ -399,7 +422,6 @@
                     });
                 }
 
-
                 /* ===============================
                     HOVER CARD VIDEO PREVIEW
                    =============================== */
@@ -432,7 +454,6 @@
                         videoEl.currentTime = 0;
                     });
                 });
-
 
                 /* ===============================
                     TOGGLE "MY LIST" LOGIC
@@ -477,7 +498,6 @@
                     });
                 });
 
-
                 /* ===============================
                     TOAST NOTIFICATION HELPER
                    =============================== */
@@ -487,9 +507,6 @@
                     setTimeout(() => $toast.css('opacity', '1'), 10);
                     setTimeout(() => $toast.fadeOut(300, () => $toast.remove()), 1500);
                 }
-
-
-
                 // decrypt response
                 function decryptResponse(encryptedHex) {
                     try {
@@ -594,13 +611,7 @@
                         loadMoreCollections();
                     }
                 });
-
-
-
             });
-
-
-
         </script>
     @endsection
 

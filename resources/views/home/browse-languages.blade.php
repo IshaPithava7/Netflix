@@ -213,118 +213,106 @@
     </style>
     <div class="px-10">
 
-        <div class="top-0 mt-[70px] z-50  bg-[#141414] px-8 md:px-16 pb-4 ">
+        <div class="top-0 mt-[70px] z-50 bg-[#141414] px-8 md:px-16 pb-4">
             <div class="flex flex-wrap items-center gap-6 text-white">
-                <!-- Browse by Languages Label (not clickable) -->
-                <p class="text-3xl font-medium opacity-90">
-                    Browse by Languages
-                </p>
+                <h1 class="text-3xl font-medium">Browse by Languages</h1>
 
-                <!-- 1. Original Language Dropdown -->
-                <div class="relative group inline-block">
-                    <button
-                        class="flex items-center gap-2 bg-black border border-gray-500 px-4 py-2 text-white font-medium rounded hover:border-white transition">
-                        <span>Original Language</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute left-0 mt-2 w-56 bg-black border border-gray-700 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <div class="py-2 max-h-80 overflow-y-auto">
-                            <a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">All
-                                Languages</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">English</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Hindi</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Spanish</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Korean</a>
-                            <!-- Add more languages as needed -->
+                <!-- Main container for dropdowns -->
+                <div class="flex items-center space-x-4">
+
+                    <!-- Preferences Dropdown -->
+                    <div class="relative" id="preferences-dropdown-wrapper">
+                        <span class="text-sm text-gray-400 mr-2">Select Your Preferences</span>
+                        <button id="preferences-button"
+                            class="inline-flex items-center justify-between w-48 px-3 py-2 text-sm font-medium text-white bg-transparent border border-gray-500 rounded-md hover:border-white focus:outline-none">
+                            <span>Original Language</span>
+                            <svg class="w-4 h-4 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="preferences-menu"
+                            class="absolute left-0 z-10 w-48 mt-2 origin-top-right bg-black border border-gray-700 rounded-md shadow-lg opacity-0 invisible transition-all duration-200">
+                            <div class="py-1">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Original
+                                    Language</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Dubbing</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Subtitles</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- 2. Audio & Subtitles Dropdown (English selected) -->
-                <div class="relative group inline-block">
-                    <button
-                        class="flex items-center gap-2 bg-black border border-gray-500 px-4 py-2 text-white font-medium rounded hover:border-white transition">
-                        <span>English</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute left-0 mt-2 w-56 bg-black border border-gray-700 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <div class="py-2 max-h-80 overflow-y-auto">
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">English</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Spanish</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">French</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">German</a>
-                            <!-- Add more -->
+                    <!-- Language Dropdown -->
+                    <div class="relative" id="language-dropdown-wrapper">
+                        <button id="language-button"
+                            class="inline-flex items-center justify-between w-48 px-3 py-2 text-sm font-medium text-white bg-transparent border border-gray-500 rounded-md hover:border-white focus:outline-none">
+                            <span>English</span>
+                            <svg class="w-4 h-4 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="language-menu"
+                            class="absolute left-0 z-10 w-48 mt-2 origin-top-right bg-black border border-gray-700 rounded-md shadow-lg opacity-0 invisible transition-all duration-200 max-h-60 overflow-y-auto">
+                            <div class="py-1">
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Indonesian</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Malay</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Turkish</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">English</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Japanese</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Spanish</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">French</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Hindi</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Korean</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">German</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Mandarin</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Italian</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Portuguese</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Cantonese</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Dutch</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Filipino</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Polish</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Swedish</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Arabic</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Tamil</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Danish</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- 3. Sort by Dropdown -->
-                <div class="relative group inline-block">
-                    <button
-                        class="flex items-center gap-2 bg-black border border-gray-500 px-4 py-2 text-white font-medium rounded hover:border-white transition">
-                        <span>Sort by</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute left-0 mt-2 w-64 bg-black border border-gray-700 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <div class="py-2">
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Suggestions For
-                                You</a>
-                            <a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Year
-                                Released</a>
-                            <a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">A-Z</a>
-                            <a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Z-A</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Suggestions For You Dropdown (optional – can be merged with Sort by) -->
-                <div class="relative group inline-block">
-                    <button
-                        class="flex items-center gap-2 bg-black border border-gray-500 px-4 py-2 text-white font-medium rounded hover:border-white transition">
-                        <span>Suggestions For You</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <div
-                        class="absolute left-0 mt-2 w-64 bg-black border border-gray-700 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                        <div class="py-2">
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Suggestions For
-                                You</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Trending
-                                Now</a>
-                            <a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">New
-                                Releases</a>
-                            <a href="#" class="block px-4 py-2 text-gray-300 hover:bg-gray-900 hover:text-white">Top
-                                10</a>
+                    <!-- Sort By Dropdown -->
+                    <div class="relative" id="sort-dropdown-wrapper">
+                        <span class="text-sm text-gray-400 mr-2">Sort by</span>
+                        <button id="sort-button"
+                            class="inline-flex items-center justify-between w-48 px-3 py-2 text-sm font-medium text-white bg-transparent border border-gray-500 rounded-md hover:border-white focus:outline-none">
+                            <span>Suggestions For You</span>
+                            <svg class="w-4 h-4 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                        </button>
+                        <div id="sort-menu"
+                            class="absolute right-0 z-10 w-48 mt-2 origin-top-right bg-black border border-gray-700 rounded-md shadow-lg opacity-0 invisible transition-all duration-200">
+                            <div class="py-1">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Suggestions
+                                    for you</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Year
+                                    Released</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">A-Z</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm text-white hover:bg-gray-800">Z-A</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -462,46 +450,54 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-    swiperInit();
+    // Handles toggling dropdown menus and closing them when clicking outside.
+    function setupDropdown(buttonId, menuId) {
+        const button = document.getElementById(buttonId);
+        const menu = document.getElementById(menuId);
 
-    // swiper wiper
+        if (button && menu) {
+            // Add a common class to all dropdown menus for easier selection
+            menu.classList.add('dropdown-menu');
+
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isCurrentlyVisible = !menu.classList.contains('invisible');
+
+                // First, hide all dropdown menus
+                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                    m.classList.add('opacity-0', 'invisible');
+                });
+
+                // If the clicked menu was not already visible, show it
+                if (!isCurrentlyVisible) {
+                    menu.classList.remove('opacity-0', 'invisible');
+                }
+            });
+        }
+    }
+
+    // Initializes all Swiper carousels on the page with Netflix-style navigation.
     function swiperInit() {
         $('.mySwiper').each(function() {
-
             const swiperEl = this;
-            const $container = $(swiperEl).closest('.relative');
+            const $container = $(swiperEl).closest('.group\\/section');
             const slideCount = $(swiperEl).find('.swiper-slide').length;
-
-            const enableLoop = slideCount >= 7;
+            const enableLoop = slideCount > 6; // Loop if there are more slides than visible
             let loopActivated = false;
             let swiper;
 
-
-            // --- FIRST SWIPER (no loop, first slide Netflix style) ---
             swiper = new Swiper(swiperEl, {
                 slidesPerView: 6.5,
                 spaceBetween: 6,
                 slidesPerGroup: 6,
                 speed: 600,
-                loop: false,
-                centeredSlides: false,
-
-                // ⭐ Fix slide width calculations
+                loop: false, // Start without loop
                 watchOverflow: true,
-                resizeObserver: true,
-                observer: true,
-                observeParents: true,
-
                 navigation: {
                     nextEl: $container.find('.swiper-button-next')[0],
                     prevEl: $container.find('.swiper-button-prev')[0],
                 },
-
                 breakpoints: {
-                    1600: {
-                        slidesPerView: 6.5,
-                        slidesPerGroup: 6
-                    },
                     1440: {
                         slidesPerView: 6.5,
                         slidesPerGroup: 6
@@ -523,76 +519,89 @@
                         slidesPerGroup: 2
                     },
                 },
-
                 on: {
-                    init() {
-                        const $prev = $container.find('.swiper-button-prev');
-                        const $next = $container.find('.swiper-button-next');
-
-                        $prev.addClass('pointer-events-none opacity-0');
-
-                        $next.on('click.firstNext', function() {
-                            if (!loopActivated && enableLoop) {
-                                loopActivated = true;
-                                const currentIndex = swiper.activeIndex;
-
-                                swiper.destroy(true, true);
-
-                                swiper = new Swiper(swiperEl, {
-                                    slidesPerView: 6.5,
-                                    spaceBetween: 6,
-                                    slidesPerGroup: 6,
-                                    speed: 600,
-                                    loop: true,
-                                    initialSlide: currentIndex,
-
-                                    // ⭐ Apply the same fixes to the loop version
-                                    watchOverflow: true,
-                                    resizeObserver: true,
-                                    observer: true,
-                                    observeParents: true,
-
-                                    navigation: {
-                                        nextEl: $container.find('.swiper-button-next')[0],
-                                        prevEl: $container.find('.swiper-button-prev')[0],
-                                    },
-
-                                    breakpoints: {
-                                        1600: {
-                                            slidesPerView: 6.5,
-                                            slidesPerGroup: 6
-                                        },
-                                        1440: {
-                                            slidesPerView: 6.5,
-                                            slidesPerGroup: 6
-                                        },
-                                        1280: {
-                                            slidesPerView: 5.5,
-                                            slidesPerGroup: 5
-                                        },
-                                        1024: {
-                                            slidesPerView: 4.5,
-                                            slidesPerGroup: 4
-                                        },
-                                        768: {
-                                            slidesPerView: 3.5,
-                                            slidesPerGroup: 3
-                                        },
-                                        640: {
-                                            slidesPerView: 2.5,
-                                            slidesPerGroup: 2
-                                        },
-                                    }
-                                });
-
-                                $prev.removeClass('pointer-events-none opacity-0');
-                                $next.off('click.firstNext');
-                            }
-                        });
-                    }
-                }
+                    init: function() {
+                        // Initially disable prev button
+                        if (this.isBeginning) {
+                            $(this.navigation.prevEl).addClass('pointer-events-none');
+                        }
+                    },
+                    slideChange: function() {
+                        // Disable/enable nav buttons if not looping
+                        if (!this.params.loop) {
+                            $(this.navigation.prevEl).toggleClass('pointer-events-none', this.isBeginning);
+                            $(this.navigation.nextEl).toggleClass('pointer-events-none', this.isEnd);
+                        }
+                    },
+                },
             });
 
+            // Special logic to enable loop on first "next" click
+            $container.find('.swiper-button-next').on('click.firstNext', function() {
+                if (!loopActivated && enableLoop) {
+                    loopActivated = true;
+                    const currentIndex = swiper.activeIndex;
+                    swiper.destroy(true, true);
+
+                    // Re-initialize Swiper with loop enabled
+                    swiper = new Swiper(swiperEl, {
+                        slidesPerView: 6.5,
+                        spaceBetween: 6,
+                        slidesPerGroup: 6,
+                        speed: 600,
+                        loop: true,
+                        initialSlide: currentIndex,
+                        watchOverflow: true,
+                        navigation: {
+                            nextEl: $container.find('.swiper-button-next')[0],
+                            prevEl: $container.find('.swiper-button-prev')[0],
+                        },
+                        breakpoints: {
+                            1440: {
+                                slidesPerView: 6.5,
+                                slidesPerGroup: 6
+                            },
+                            1280: {
+                                slidesPerView: 5.5,
+                                slidesPerGroup: 5
+                            },
+                            1024: {
+                                slidesPerView: 4.5,
+                                slidesPerGroup: 4
+                            },
+                            768: {
+                                slidesPerView: 3.5,
+                                slidesPerGroup: 3
+                            },
+                            640: {
+                                slidesPerView: 2.5,
+                                slidesPerGroup: 2
+                            },
+                        },
+                    });
+
+                    // No longer need to manually manage button state
+                    $(swiper.navigation.prevEl).removeClass('pointer-events-none');
+                    $(swiper.navigation.nextEl).removeClass('pointer-events-none');
+                    $(this).off('click.firstNext');
+                }
+            });
         });
     }
+
+    // Set up dropdowns and global click listener when the page is ready
+    document.addEventListener('DOMContentLoaded', () => {
+        setupDropdown('preferences-button', 'preferences-menu');
+        setupDropdown('language-button', 'language-menu');
+        setupDropdown('sort-button', 'sort-menu');
+
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.classList.add('opacity-0', 'invisible');
+            });
+        });
+    });
+
+    // Initial call to set up the carousels
+    swiperInit();
 </script>

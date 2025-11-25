@@ -157,21 +157,29 @@
                             Movies
                         </h1>
 
-                        <!-- Genres Dropdown -->
-                        <div class="relative group inline-block">
-                            <button class="flex items-center bg-black border border-gray-500 p-1 text-white font-medium hover:border-white transition">
+                        <!-- Genres Dropdown (Real Netflix Style) -->
+                        <div id="genres-dropdown" class="relative inline-block">
+                            <button id="genres-button"
+                                class="flex items-center bg-black border border-gray-500 p-1 text-white font-medium hover:border-white transition">
                                 <span>Genres</span>
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
                                 </svg>
                             </button>
-
-                            <div class="absolute right-0 mt-2 w-64 bg-black border border-gray-700 rounded-md shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                                <div class="py-2 max-h-80 overflow-y-auto">
-                                    @foreach($collectionGenre as $collectionTitle)
-                                    <a href="#" class="block px-6 py-3 text-gray-300 hover:bg-gray-900 hover:text-white transition">
-                                        {{ $collectionTitle }}
-                                    </a>
+                            <div id="genres-menu"
+                                class="absolute left-0 mt-2 w-[700px] bg-black bg-opacity-90 border border-gray-700 rounded-md shadow-2xl transition-all duration-300 z-50 opacity-0 invisible p-6">
+                                <div class="grid grid-cols-3 gap-x-8 gap-y-2">
+                                    @foreach($collectionGenre as $column)
+                                        <div class="flex flex-col space-y-2">
+                                            @foreach($column as $genre)
+                                                <a href="#"
+                                                    class="text-gray-300 hover:underline whitespace-nowrap">
+                                                    {{ $genre }}
+                                                </a>
+                                            @endforeach
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -574,6 +582,25 @@
 
 
 
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const genresButton = document.getElementById('genres-button');
+            const genresMenu = document.getElementById('genres-menu');
+
+            if (genresButton && genresMenu) {
+                genresButton.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                    genresMenu.classList.toggle('opacity-0');
+                    genresMenu.classList.toggle('invisible');
+                });
+
+                document.addEventListener('click', function (event) {
+                    if (!genresMenu.contains(event.target) && !genresButton.contains(event.target)) {
+                        genresMenu.classList.add('opacity-0', 'invisible');
+                    }
+                });
+            }
         });
     </script>
 

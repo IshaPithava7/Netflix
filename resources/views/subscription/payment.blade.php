@@ -279,8 +279,7 @@
 
                     // Send to backend via AJAX
                     const response = await $.ajax({
-                        url: '{{ route('
-                        subscription.subscribe ') }}',
+                        url: '{{ route('subscription.subscribe') }}',
                         type: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -313,8 +312,7 @@
                     }
 
                     // Success: redirect
-                    window.location.href = response.redirect || '{{ route('
-                    home ') }}';
+                    window.location.href = response.redirect || '{{ route('home') }}';
 
                 } catch (err) {
                     console.error('Payment error:', err);

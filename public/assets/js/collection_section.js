@@ -1,135 +1,82 @@
 $(document).ready(function () {
     swiperInit();
 
-    // swiper wiper
     function swiperInit() {
         $(".mySwiper").each(function () {
             const swiperEl = this;
             const $container = $(swiperEl).closest(".relative");
             const slideCount = $(swiperEl).find(".swiper-slide").length;
-
             const enableLoop = slideCount >= 7;
             let loopActivated = false;
-            let swiper;
 
-            // --- FIRST SWIPER (no loop, first slide Netflix style) ---
-            swiper = new Swiper(swiperEl, {
+            let swiper = new Swiper(swiperEl, {
                 slidesPerView: 6.5,
                 spaceBetween: 6,
                 slidesPerGroup: 6,
                 speed: 600,
                 loop: false,
                 centeredSlides: false,
-
                 slidesOffsetBefore: 40,
                 slidesOffsetAfter: 60,
-
                 navigation: {
                     nextEl: $container.find(".swiper-button-next")[0],
                     prevEl: $container.find(".swiper-button-prev")[0],
                 },
-
                 breakpoints: {
-                    1600: {
-                        slidesPerView: 6.5,
-                        slidesPerGroup: 6,
-                    },
-                    1440: {
-                        slidesPerView: 6.5,
-                        slidesPerGroup: 6,
-                    },
-                    1280: {
-                        slidesPerView: 5.5,
-                        slidesPerGroup: 5,
-                    },
-                    1024: {
-                        slidesPerView: 4.5,
-                        slidesPerGroup: 4,
-                    },
-                    768: {
-                        slidesPerView: 3.5,
-                        slidesPerGroup: 3,
-                    },
-                    640: {
-                        slidesPerView: 2.5,
-                        slidesPerGroup: 2,
-                    },
+                    1600: { slidesPerView: 6.5, slidesPerGroup: 6 },
+                    1440: { slidesPerView: 6.5, slidesPerGroup: 6 },
+                    1280: { slidesPerView: 5.5, slidesPerGroup: 5 },
+                    1024: { slidesPerView: 4.5, slidesPerGroup: 4 },
+                    768: { slidesPerView: 3.5, slidesPerGroup: 3 },
+                    640: { slidesPerView: 2.5, slidesPerGroup: 2 },
                 },
-
                 on: {
-                    init() {
-                        const $prev = $container.find(".swiper-button-prev");
-                        const $next = $container.find(".swiper-button-next");
-
+                    init: function () {
+                        const $prev = $(this.navigation.prevEl);
                         $prev.addClass("pointer-events-none opacity-0");
-
-                        // FIRST NEXT click → enable loop mode
-                        $next.on("click.firstNext", function () {
-                            if (!loopActivated && enableLoop) {
-                                loopActivated = true;
-
-                                const currentIndex = swiper.activeIndex;
-
-                                swiper.destroy(true, true);
-
-                                // --- SECOND SWIPER (loop enabled like Netflix) ---
-                                swiper = new Swiper(swiperEl, {
-                                    slidesPerView: 6.5,
-                                    spaceBetween: 6,
-                                    slidesPerGroup: 6,
-                                    speed: 600,
-                                    loop: true,
-                                    initialSlide: currentIndex,
-
-                                    slidesOffsetBefore: 40,
-                                    slidesOffsetAfter: 60,
-
-                                    navigation: {
-                                        nextEl: $container.find(
-                                            ".swiper-button-next"
-                                        )[0],
-                                        prevEl: $container.find(
-                                            ".swiper-button-prev"
-                                        )[0],
-                                    },
-
-                                    breakpoints: {
-                                        1600: {
-                                            slidesPerView: 6.5,
-                                            slidesPerGroup: 6,
-                                        },
-                                        1440: {
-                                            slidesPerView: 6.5,
-                                            slidesPerGroup: 6,
-                                        },
-                                        1280: {
-                                            slidesPerView: 5.5,
-                                            slidesPerGroup: 5,
-                                        },
-                                        1024: {
-                                            slidesPerView: 4.5,
-                                            slidesPerGroup: 4,
-                                        },
-                                        768: {
-                                            slidesPerView: 3.5,
-                                            slidesPerGroup: 3,
-                                        },
-                                        640: {
-                                            slidesPerView: 2.5,
-                                            slidesPerGroup: 2,
-                                        },
-                                    },
-                                });
-
-                                $prev.removeClass(
-                                    "pointer-events-none opacity-0"
-                                );
-
-                                $next.off("click.firstNext");
+                    },
+                    slideChange: function () {
+                        if (!loopActivated) {
+                            const $prev = $(this.navigation.prevEl);
+                            if (this.isBeginning) {
+                                $prev.addClass("pointer-events-none opacity-0");
+                            } else {
+                                $prev.removeClass("pointer-events-none opacity-0");
                             }
-                        });
+                        }
                     },
                 },
+            });
+
+            $container.find(".swiper-button-next").on("click.firstNext", function () {
+                if (!loopActivated && enableLoop) {
+                    loopActivated = true;
+                    swiper.destroy(true, true);
+                    swiper = new Swiper(swiperEl, {
+                        slidesPerView: 6,
+                        spaceBetween: 6,
+                        slidesPerGroup: 6,
+                        speed: 600,
+                        loop: true,
+                        centeredSlides: false,
+                        slidesOffsetBefore: 40,
+                        slidesOffsetAfter: 60,
+                        navigation: {
+                            nextEl: $container.find(".swiper-button-next")[0],
+                            prevEl: $container.find(".swiper-button-prev")[0],
+                        },
+                        breakpoints: {
+                            1600: { slidesPerView: 6, slidesPerGroup: 6 },
+                            1440: { slidesPerView: 6, slidesPerGroup: 6 },
+                            1280: { slidesPerView: 5, slidesPerGroup: 5 },
+                            1024: { slidesPerView: 4, slidesPerGroup: 4 },
+                            768: { slidesPerView: 3, slidesPerGroup: 3 },
+                            640: { slidesPerView: 2, slidesPerGroup: 2 },
+                        },
+                    });
+                    $(swiper.navigation.prevEl).removeClass("pointer-events-none opacity-0");
+                    $(this).off("click.firstNext");
+                }
             });
         });
     }
