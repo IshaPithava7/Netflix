@@ -1,4 +1,4 @@
-<header id="navbar" class="flex items-center justify-between h-[70px] w-full px-14 fixed top-0 z-50 transition-colors duration-700">
+<header id="navbar" class="flex items-center justify-between h-16 w-full px-14 fixed top-0 z-50 transition-colors duration-700">
     {{-- Logo Section --}}
     <div class="flex items-center shrink-0">
         <a href="#">
@@ -7,7 +7,7 @@
     </div>
 
     {{-- Navigation Menu --}}
-    <nav class="flex items-center flex-1 ml-[15px] pt-5">
+    <nav class="flex items-center flex-1 ml-[15px] pt-3">
         <ul class="flex items-center space-x-5 text-sm">
             <li class="{{ request()->routeIs('home') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
                 <a href="{{ route('home') }}" class="no-underline! text-white">Home</a>
