@@ -30,8 +30,11 @@ class HomeController extends Controller
             'description'
         ])->limit(10)->get();
 
+<<<<<<< HEAD
      
 
+=======
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
         $allCollections = Collection::with([
             'videos' => function ($q) {
                 $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');

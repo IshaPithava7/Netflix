@@ -19,7 +19,11 @@
         <div class="relative w-[850px] h-[500px] overflow-hidden shadow-2xl">
 
             {{-- Poster --}}
+<<<<<<< HEAD
             <img id="modalPoster" src="{{ $poster }}" alt="{{ $featured->title }}" loading="lazy"
+=======
+            <img id="modalPoster" src="{{ $featured->$poster }}" alt="{{ $featured->title }}"
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 opacity-100">
 
             {{-- Video --}}

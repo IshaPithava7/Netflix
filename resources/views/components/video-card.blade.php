@@ -71,7 +71,11 @@
     : $video->poster;
     @endphp
 
+<<<<<<< HEAD
     <div class="group relative z-0 hover:z-9999! transition-[z-index] duration-0 hover:delay-0 delay-300">
+=======
+    <div class="group relative z-0 hover:!z-[9999] transition-[z-index] duration-0 hover:delay-0 delay-300">
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
         <div class="relative bg-[#1a1a1a] rounded-xs overflow-hidden aspect-video shadow-lg transition-all duration-300 ease-in-out cursor-pointer">
             @if($video->file_path)
             <video class="w-full h-full object-cover" muted poster="{{ $poster }}">
@@ -81,7 +85,11 @@
             <img src="{{ $poster }}" alt="{{ $video->title }}" class="w-full h-full object-cover" loading="lazy">
             @endif
         </div>
+<<<<<<< HEAD
         <div class="absolute -top-40px left-1/2 -translate-x-1/2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 ease-in-out group-hover:delay-500 w-[300px] rounded-lg overflow-hidden shadow-2xl bg-[#181818] group-hover:scale-110 origin-top pointer-events-none group-hover:pointer-events-auto z-9999">
+=======
+        <div class="absolute top-[-40px] left-1/2 -translate-x-1/2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 ease-in-out group-hover:delay-500 w-[300px] rounded-lg overflow-hidden shadow-2xl bg-[#181818] group-hover:scale-110 origin-top pointer-events-none group-hover:pointer-events-auto z-[9999]">
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
             <div class="relative aspect-video">
                 @if($video->file_path)
                 <video class="w-full h-full object-cover" autoplay muted loop poster="{{ $poster }}">
@@ -133,4 +141,8 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 @endif
+=======
+@endif
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8

@@ -38,7 +38,15 @@
     <script src="{{asset('cdn/js/select2.min.js')}}"></script>
 
     <!-- CryptoJS CDN -->
+<<<<<<< HEAD
     <script src="{{asset('cdn/js/crypto-js.min.js')}}"></script>
+=======
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+
+    <title>@yield('title', 'Netflix Clone')</title>
+    <meta name="description" content="@yield('description', 'A clone of the popular streaming service Netflix, built with Laravel.')">
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
 
     <style>
         [x-cloak] {
@@ -50,7 +58,7 @@
 <body class="bg-[#141414] font-sans text-white">
 
     {{-- Header --}}
-    <x-navbar />
+    <x-navbar class="bg-black bg-opacity-75" />
 
     {{-- Admin vs Normal User Layout --}}
     @can('isAdmin')

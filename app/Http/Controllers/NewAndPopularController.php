@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Models\Collection;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -22,4 +23,22 @@ class NewAndPopularController extends Controller
     }
 
 
+=======
+use App\Services\NewAndPopularService;
+
+class NewAndPopularController extends Controller
+{
+    protected $newAndPopularService;
+
+    public function __construct(NewAndPopularService $newAndPopularService)
+    {
+        $this->newAndPopularService = $newAndPopularService;
+    }
+
+    public function NewAndPopular()
+    {
+
+        return view('home.new-popular' );
+    }
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
 }

@@ -96,5 +96,46 @@
 
 </html>
 
+<<<<<<< HEAD
 <!-- custom js -->
 <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+=======
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        const $form = $('#email-form');
+        const $emailInput = $('#email-input');
+        const $errorMessage = $('#error-message');
+
+        $form.on('submit', function (e) {
+            const emailValue = $.trim($emailInput.val());
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Clear previous error
+            $errorMessage.addClass('hidden');
+            $emailInput.removeClass('border-red-500');
+
+            if (emailValue === '') {
+                e.preventDefault();
+                $errorMessage.text('Email is required.').removeClass('hidden');
+                $emailInput.addClass('border-red-500');
+            } else if (!emailPattern.test(emailValue)) {
+                e.preventDefault();
+                $errorMessage.text('Please enter a valid email address.').removeClass('hidden');
+                $emailInput.addClass('border-red-500');
+            }
+        });
+
+        // Hide error on typing
+        $emailInput.on('input', function () {
+            $errorMessage.addClass('hidden');
+            $emailInput.removeClass('border-red-500');
+        });
+    });
+
+</script>
+
+ishuuu
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8

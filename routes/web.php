@@ -171,11 +171,17 @@ Route::middleware($middlewares)->group(function () {
     */
     Route::get('/shows', [ShowsController::class, 'Shows'])->name('shows');
     Route::view('/games', 'home.games')->name('games.index');
+<<<<<<< HEAD
 
     Route::get('/new-popular', [NewAndPopularController::class, 'newAndPopular'])->name('newpopular');
 
     Route::get('/browse-languages', [browseBylanguageController::class, 'browseBylanguage'])->name('browse.languages');
     Route::get('/movies', [MoviesController::class, 'movies'])->name('movies');
+=======
+    Route::get('/new-popular', [\App\Http\Controllers\NewAndPopularController::class, 'NewAndPopular'])->name('newpopular');
+    Route::get('/browse-languages', [\App\Http\Controllers\BrowseByLanguageController::class, 'index'])->name('browse.languages');
+    Route::get('/movies', [MoviesController::class, 'index'])->name('movies');
+>>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
 
     /*
     |--------------------------------------------------------------------------
