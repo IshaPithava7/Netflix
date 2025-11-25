@@ -15,13 +15,13 @@
      z-50 transition-colors duration-700 border-b border-gray-300
           {{ request()->is('home') || request()->is('games*') ? 'bg-transparent' : 'bg-[#ffffff]' }}">
         {{-- Logo Section --}}
-        <div class=" flex items-center flex-shrink-0">
+        <div class=" flex items-center shrink-0">
             <a href="#">
                 <img src="{{ asset('storage/logo/Logonetflix.png') }}" alt="Netflix Logo" class="w-26 h-auto" loading="lazy"> 
             </a>
         </div>
 
-        <div class=" flex items-center flex-shrink-0">
+        <div class=" flex items-center shrink-0">
             <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none group">
                 <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="Profile" loading="lazy"
                     class="rounded w-8 h-8">
@@ -112,7 +112,7 @@
     <main class="max-w-7xl mx-auto px-10 pt-25">
         <div class="flex gap-8">
             {{-- Sidebar Navigation --}}
-            <aside class="w-64 flex-shrink-0">
+            <aside class="w-64 shrink-0">
                 <nav class="space-y-1">
                     {{-- Back Link --}}
                     <a href="{{ route('home') }}"

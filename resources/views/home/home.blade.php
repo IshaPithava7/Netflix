@@ -133,7 +133,7 @@
         </style>
 
         <div class="bg-[#141414] min-h-screen text-white mb-12">
-            <main class="flex-grow ">
+            <main class="grow ">
 
                 {{-- hero banner --}}
                 @if($heroCollection && $heroCollection->videos->isNotEmpty())

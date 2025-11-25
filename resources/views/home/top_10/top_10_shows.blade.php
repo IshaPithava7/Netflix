@@ -152,7 +152,7 @@
                                 @endif
 
                                 {{-- Gradient Overlay --}}
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent">
+                                <div class="absolute inset-0 bg-linear-to-t from-[#181818] via-transparent to-transparent">
                                 </div>
 
                                 {{-- Title poster in bottom-left --}}

@@ -21,11 +21,6 @@
             margin: -100px 0 -100px 0 !important;
         }
 
-        .swiper-wrapper {
-            /* overflow: visible !important;
-            justify-content: flex-start !important; */
-        }
-
         /* Hover card base state */
         .hover-card {
             display: block !important;
@@ -269,7 +264,7 @@
 
                                     {{-- Gradient Overlay --}}
                                     <div
-                                        class="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent">
+                                        class="absolute inset-0 bg-linear-to-t from-[#181818] via-transparent to-transparent">
                                     </div>
 
                                     {{-- Title Logo --}}

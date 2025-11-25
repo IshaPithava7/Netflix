@@ -20,7 +20,7 @@
 
 
             <!-- Bottom blur/fade -->
-            <div class="absolute bottom-0 left-0 w-full h-15 bg-gradient-to-t from-[#181818] to-transparent ">
+            <div class="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-[#181818] to-transparent ">
             </div>
 
 
@@ -56,7 +56,7 @@
         </div>
 
         <!-- Movie Details -->
-        <div id="movieDetails" class="pt-0 px-10 pb-10 bg-gradient-to-t from-[#181818] via-[#181818]/80 to-transparent  relative rounded-t-3xl">
+        <div id="movieDetails" class="pt-0 px-10 pb-10 bg-linear-to-t from-[#181818] via-[#181818]/80 to-transparent  relative rounded-t-3xl">
             <div class="grid grid-cols-3 gap-8">
                 <!-- Left Column -->
                 <div class="col-span-2 ">

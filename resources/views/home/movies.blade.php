@@ -133,7 +133,7 @@
     </style>
 
     <div class="min-h-screen text-white mb-12">
-        <main class="flex-grow ">
+        <main class="grow ">
 
             {{-- hero banner --}}
             @if($heroCollection && $heroCollection->videos->isNotEmpty())
@@ -192,12 +192,12 @@
                     @endif
 
                     {{-- Overlay --}}
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                    <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
 
                     <div class="absolute inset-0 pointer-events-none">
 
                         <!-- Bottom blur/fade -->
-                        <div class="absolute bottom-0 left-0 w-full h-15 bg-gradient-to-t from-[#181818] to-transparent ">
+                        <div class="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-[#181818] to-transparent ">
                         </div>
                     </div>
 

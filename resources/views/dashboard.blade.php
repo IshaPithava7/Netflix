@@ -23,7 +23,7 @@
                     repeating-linear-gradient(0deg, rgba(229, 9, 20, 0.03) 0px, transparent 2px, transparent 40px);">
             </div>
         </div>
-        <header class="flex justify-between items-center py-6 px-10 md:px-12 bg-gradient-to-b from-black/70 to-transparent z-50">
+        <header class="flex justify-between items-center py-6 px-10 md:px-12 bg-linear-to-b from-black/70 to-transparent z-50">
             <img src="{{ asset('storage/logo/Logonetflix.png') }}" alt="Netflix Logo" class="w-38 h-auto" loading="lazy">
 
 
@@ -70,7 +70,7 @@
                             placeholder-white/50 focus:border-white focus:bg-black/90 focus:outline-none transition w-full" placeholder="Email address" value="{{ old('email') }}">
 
                     <!-- Error message absolutely positioned -->
-                    <p id="error-message" class="text-red-500 text-sm absolute left-0 bottom-[-2.5rem] hidden">
+                    <p id="error-message" class="text-red-500 text-sm absolute left-0 -bottom-10 hidden">
                         Please enter a valid email address.
                     </p>
 
