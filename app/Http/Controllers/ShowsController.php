@@ -7,7 +7,7 @@ use App\Models\Video;
 use App\Models\Collection;
 use Illuminate\Support\Facades\Auth;
 
-class MoviesController extends Controller
+class ShowsController extends Controller
 {
     protected $contentPageService;
 
@@ -16,9 +16,12 @@ class MoviesController extends Controller
         $this->contentPageService = $contentPageService;
     }
 
-    public function movies()
+    /**
+     * Display a listing of the resource.
+     */
+    public function shows()
     {
-         $user = Auth::user();
+        $user = Auth::user();
 
         $localVideos = Video::select([
             'id',
@@ -50,7 +53,7 @@ class MoviesController extends Controller
             ->values();
 
 
-        return view('home.movies', [
+        return view('home.shows', [
             // 'user' => $user,
             'localVideos' => $localVideos,
             // 'allCollections' => $allCollections,
@@ -59,6 +62,5 @@ class MoviesController extends Controller
             'top10Collection' => $top10Collection,
             // 'myListIds' => $myListIdsMap,
         ]);
-        return view('home.movies', $data);
     }
 }

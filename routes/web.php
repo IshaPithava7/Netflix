@@ -128,8 +128,8 @@ Route::middleware($middlewares)->group(function () {
     */
     Route::view('/shows', 'home.shows')->name('shows');
     Route::view('/games', 'home.games')->name('games.index');
-    Route::view('/new-popular', 'home.new-popular')->name('newpopular');
-    Route::view('/browse-languages', 'home.browse-languages')->name('browse.languages');
+    Route::get('/new-popular', [\App\Http\Controllers\NewAndPopularController::class, 'NewAndPopular'])->name('newpopular');
+    Route::get('/browse-languages', [\App\Http\Controllers\BrowseByLanguageController::class, 'index'])->name('browse.languages');
     Route::get('/movies', [MoviesController::class, 'index'])->name('movies');
 
     /*

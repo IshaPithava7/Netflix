@@ -30,15 +30,6 @@ class HomeController extends Controller
             'description'
         ])->limit(10)->get();
 
-        $myListIdsMap = [];
-        if ($user) {
-            $myListIds = $user->myListVideos()
-                ->pluck('videos.id')
-                ->toArray();
-
-            $myListIdsMap = array_flip($myListIds);
-        }
-
         $allCollections = Collection::with([
             'videos' => function ($q) {
                 $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');
