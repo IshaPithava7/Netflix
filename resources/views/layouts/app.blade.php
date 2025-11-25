@@ -10,8 +10,8 @@
     <meta name="description" content="@yield('description', 'A clone of the popular streaming service Netflix, built with Laravel.')">
 
     {{-- Vite --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    @vite(['resources/css/app.css', 'resources/js/app.js'])        
+ 
     <!-- Chart.js CDN -->
     <script src="{{ asset('cdn/js/chart.js') }}"></script>
 
