@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
+
 use App\Models\Collection;
 use App\Models\Type;
 use App\Models\Video;
 use Illuminate\Http\Request;
-=======
-use App\Services\ContentPageService;
-use App\Models\Video;
-use App\Models\Collection;
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
+
 use Illuminate\Support\Facades\Auth;
 
 class ShowsController extends Controller
 {
-<<<<<<< HEAD
+
     public function Shows()
     {
         $user = Auth::user();
@@ -24,22 +20,7 @@ class ShowsController extends Controller
         $genres = Type::pluck('name')->toArray();
         $collectionGenre = array_chunk($genres, ceil(count($genres) / 3));
 
-=======
-    protected $contentPageService;
 
-    public function __construct(ContentPageService $contentPageService)
-    {
-        $this->contentPageService = $contentPageService;
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function shows()
-    {
-        $user = Auth::user();
-
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
         $localVideos = Video::select([
             'id',
             'title',
@@ -49,18 +30,6 @@ class ShowsController extends Controller
             'description'
         ])->limit(10)->get();
 
-<<<<<<< HEAD
-        $myListIdsMap = [];
-        if ($user) {
-            $myListIds = $user->myListVideos()
-                ->pluck('videos.id')
-                ->toArray();
-
-            $myListIdsMap = array_flip($myListIds);
-        }
-
-=======
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
         $allCollections = Collection::with([
             'videos' => function ($q) {
                 $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');
@@ -84,10 +53,9 @@ class ShowsController extends Controller
 
         return view('home.shows', [
             // 'user' => $user,
-<<<<<<< HEAD
+
             'collectionGenre' => $collectionGenre,
-=======
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
+
             'localVideos' => $localVideos,
             // 'allCollections' => $allCollections,
             'mainCollections' => $mainCollections,
@@ -96,9 +64,4 @@ class ShowsController extends Controller
             // 'myListIds' => $myListIdsMap,
         ]);
     }
-<<<<<<< HEAD
-
-  
-=======
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
 }

@@ -10,10 +10,7 @@ use App\Models\Video;
 class VideoCard extends Component
 {
     public $video;
-<<<<<<< HEAD
 
-=======
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
     public $type;
 
     /**

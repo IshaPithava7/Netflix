@@ -132,11 +132,8 @@
             }
         </style>
 
-<<<<<<< HEAD
         <div class="min-h-screen text-white mb-12">
-=======
-        <div class="bg-[#141414] min-h-screen text-white mb-12">
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
+
             <main class="flex-grow ">
 
                 {{-- hero banner --}}
@@ -154,7 +151,6 @@
                         }
                     @endphp
 
-<<<<<<< HEAD
                     <section class="relative mb-20">
                         <div class="sticky top-0 mt-[70px] z-50 bg-transparent px-8 md:px-16 ">
                             <div class="flex items-center">
@@ -195,13 +191,7 @@
                         <div class="relative w-full h-[800px] overflow-hidden shadow-2xl">
                             <!-- Poster -->
                             <img id="heroPoster" src="{{ $poster }}" alt="{{ $featured->title }}" loading="lazy"
-=======
-                    <section class="relative mb-12">
 
-                        <div class="relative w-full h-[800px] overflow-hidden shadow-2xl">
-                            <!-- Poster -->
-                            <img id="heroPoster" src="{{ $poster }}" alt="{{ $featured->title }}"
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                                 class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700 opacity-100"
                                 fetchpriority="high">
 
@@ -227,11 +217,7 @@
 
                             {{-- Text --}}
                             <div class="absolute bottom-75 left-15 z-10 transition-opacity duration-700 opacity-100">
-<<<<<<< HEAD
                                 <img src="{{ asset('storage/' . $featured->title_poster) }}" alt="{{ $featured->title }}" loading="lazy"
-=======
-                                <img src="{{ asset('storage/' . $featured->title_poster) }}" alt="{{ $featured->title }}"
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                                     id="titlePoster" class="mb-4 w-[500px] h-auto object-contain transition-all duration-700">
                                 <p id="heroText" class="text-white font-medium max-w-lg mb-6 font-open-sans">
                                     {{ $featured->description }}
@@ -284,22 +270,13 @@
                 @endif
 
                 {{-- Sections loop --}}
-<<<<<<< HEAD
-                <!-- <div id="collections-container" class="">
-                            {{-- collections --}}
-                            @foreach($mainCollections->take(3) as $collection)
-                                @include('home.collections.collection_section', ['collections' => [$collection]])
-                            @endforeach
-                        </div> -->
-=======
+
                 <div id="collections-container" class="">
                     {{-- collections  --}}
                     @foreach($mainCollections->take(3) as $collection)
                         @include('home.collections.collection_section', ['collections' => [$collection]])
                     @endforeach
                 </div>
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
-
 
                 <!-- Skeleton Loader (6 Cards) -->
                 <div id="loader" role="status" class="grid grid-cols-6 ml-20 animate-pulse">
@@ -339,7 +316,6 @@
         @include('home.models.more_info_model')
         @include('home.models.section_more_info_model')
 
-<<<<<<< HEAD
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const genresButton = document.getElementById('genres-button');
@@ -360,8 +336,6 @@
                 }
             });
         </script>
-=======
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script>
@@ -392,10 +366,7 @@
                     });
                 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                 /* ===============================
                     MODAL BEHAVIOR
                    =============================== */
@@ -454,10 +425,6 @@
                     });
                 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                 /* ===============================
                     HOVER CARD VIDEO PREVIEW
                    =============================== */
@@ -491,10 +458,6 @@
                     });
                 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                 /* ===============================
                     TOGGLE "MY LIST" LOGIC
                    =============================== */
@@ -538,10 +501,6 @@
                     });
                 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                 /* ===============================
                     TOAST NOTIFICATION HELPER
                    =============================== */
@@ -551,12 +510,7 @@
                     setTimeout(() => $toast.css('opacity', '1'), 10);
                     setTimeout(() => $toast.fadeOut(300, () => $toast.remove()), 1500);
                 }
-<<<<<<< HEAD
-=======
 
-
-
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
                 // decrypt response
                 function decryptResponse(encryptedHex) {
                     try {
@@ -621,10 +575,8 @@
                                 // 🔍 Step 2: Parse the decrypted JSON
                                 const response = JSON.parse(decrypted);
 
-<<<<<<< HEAD
-=======
+
                                 console.log(" Decrypted response:", response);
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
 
                                 //  Step 3: Use the JSON object normally
                                 if (response.done) {
@@ -665,17 +617,9 @@
                         loadMoreCollections();
                     }
                 });
-<<<<<<< HEAD
-            });
-=======
-
-
 
             });
 
-
-
->>>>>>> c9e99602ab009b88ada301ed06b31af527641be8
         </script>
     @endsection
 
