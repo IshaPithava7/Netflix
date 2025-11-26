@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Collection;
 use App\Models\Type;
 use App\Models\Video;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class MoviesController extends Controller
+class GamesController extends Controller
 {
-    public function movies()
+    public function games()
     {
-
         $user = Auth::user();
-
 
         $localVideos = Video::select([
             'id',
@@ -38,7 +35,7 @@ class MoviesController extends Controller
 
         $genres = Type::pluck('name')->toArray();
         $collectionGenre = array_chunk($genres, ceil(count($genres) / 3));
-        
+
         $heroCollection = Collection::firstWhere('title', 'Hero Section');
 
         $top10Collection = Collection::firstWhere('title', 'Top 10 Shows in India Today');
@@ -52,18 +49,17 @@ class MoviesController extends Controller
 
             ->values();
 
-
-        return view('home.movies', [
+        $viewData = [
             // 'user' => $user,
             'localVideos' => $localVideos,
             // 'allCollections' => $allCollections,
-
             'collectionGenre' => $collectionGenre,
-
             'mainCollections' => $mainCollections,
             'heroCollection' => $heroCollection,
             'top10Collection' => $top10Collection,
-            // 'myListIds' => $myListIdsMap,
-        ]);
+        ];
+
+
+        return view('home.games', $viewData);
     }
 }

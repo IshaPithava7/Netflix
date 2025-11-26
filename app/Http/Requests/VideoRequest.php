@@ -28,6 +28,7 @@ class VideoRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
+            'video_url' => 'nullable|url',
 
             'types' => 'required|array',
             'types.*' => 'exists:types,id',

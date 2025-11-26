@@ -50,6 +50,12 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }    /**
+     * Get the profiles for the user.
+     */
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
     }
 
     public function roles()
@@ -62,11 +68,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasRole($role)
     {
         return $this->roles()->where('name', $role)->exists();
-    }
-
-    public function profiles()
-    {
-        return $this->hasMany(Profile::class);
     }
 
     public function myListVideos()
@@ -108,5 +109,4 @@ class User extends Authenticatable implements MustVerifyEmail
             );
         });
     }
-
 }

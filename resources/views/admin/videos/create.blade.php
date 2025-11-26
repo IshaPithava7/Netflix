@@ -1,7 +1,7 @@
 <x-layouts.app>
 
 
-@section('content')
+    @section('content')
     <style>
         /* Default theme dark mode */
         .select2-container--default .select2-selection--multiple {
@@ -61,7 +61,7 @@
         }
     </style>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#types').select2({
                 placeholder: "Select video types",
                 allowClear: true,
@@ -76,13 +76,13 @@
         <h1 class="text-3xl font-bold mb-6 text-white">Upload New Video</h1>
 
         @if ($errors->any())
-            <div class="bg-red-600 text-white p-4 rounded mb-4">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>- {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="bg-red-600 text-white p-4 rounded mb-4">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>- {{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
 
         <form action="{{ route('admin.videos.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
@@ -92,6 +92,12 @@
             <div>
                 <label for="title" class="block text-white font-semibold mb-1">Title</label>
                 <input type="text" name="title" id="title" class="w-full p-3 rounded bg-gray-800 text-white" required>
+            </div>
+
+            <!-- Video URL -->
+            <div class="mt-4">
+                <label for="video_url">Video URL</label>
+                <input type="file" name="video_url" id="video_url" class="w-full p-3 rounded bg-gray-800 text-white" required>
             </div>
 
             <!-- Description -->
@@ -119,7 +125,7 @@
                 <label for="types" class="block text-white font-semibold mb-1">Select Video Types</label>
                 <select name="types[]" id="types" multiple class="w-full p-3 rounded bg-gray-800 text-[#ffffff]">
                     @foreach($types as $type)
-                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -129,9 +135,9 @@
                 <label for="collections" class="block font-semibold mb-2 text-white">Collections (Optional)</label>
                 <select name="collections[]" id="collections" multiple class="form-select w-full bg-[#131313]">
                     @foreach($collections as $collection)
-                        <option value="{{ $collection->id }}" @if(isset($video) && $video->collections->contains($collection->id)) selected @endif>
-                            {{ $collection->title }}
-                        </option>
+                    <option value="{{ $collection->id }}" @if(isset($video) && $video->collections->contains($collection->id)) selected @endif>
+                        {{ $collection->title }}
+                    </option>
                     @endforeach
                 </select>
                 <small class="text-gray-500">Hold Ctrl (Windows) or ⌘ (Mac) to select multiple.</small>
@@ -175,9 +181,9 @@
     </div>
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Video Preview
-            $('#video').on('change', function () {
+            $('#video').on('change', function() {
                 const file = this.files[0];
                 const $previewContainer = $('#video-preview-container');
                 const $preview = $('#video-preview');
@@ -193,7 +199,7 @@
             });
 
             // Poster Preview
-            $('#poster').on('change', function () {
+            $('#poster').on('change', function() {
                 const file = this.files[0];
                 const $previewContainer = $('#poster-preview-container');
                 const $preview = $('#poster-preview');
@@ -209,7 +215,7 @@
             });
 
             // Title Poster Preview
-            $('#title_poster').on('change', function () {
+            $('#title_poster').on('change', function() {
                 const file = this.files[0];
                 const $previewContainer = $('#title-poster-preview-container');
                 const $preview = $('#title-poster-preview');
@@ -226,6 +232,6 @@
         });
     </script>
 
-@endsection
+    @endsection
 
 </x-layouts.app>

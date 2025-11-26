@@ -3,6 +3,7 @@
 use App\Http\Controllers\browseBylanguageController;
 use App\Http\Controllers\NewAndPopularController;
 use App\Http\Controllers\ShowsController;
+use App\Http\Controllers\GamesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\MyListController;
-use App\Http\Controllers\NewAndPopular;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Auth\GoogleController;
@@ -124,6 +124,12 @@ Route::middleware($middlewares)->group(function () {
     Route::get('/profile', [HomeController::class, 'accountSettings'])->name('accountSettings');
     Route::post('/profiles', [ProfileController::class, 'store']);
 
+    // Profiles
+    Route::get('profiles/manage', [ProfileController::class, 'manage'])->name('profiles.manage');
+    Route::resource('profiles', ProfileController::class)->except(['show']);
+    Route::get('profiles/switch/{profile}', [ProfileController::class, 'switch'])->name('profiles.switch');
+
+
     // Account
     Route::delete('/account/delete', [AuthController::class, 'deleteAccount'])->name('account.delete');
 
@@ -170,7 +176,7 @@ Route::middleware($middlewares)->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::get('/shows', [ShowsController::class, 'Shows'])->name('shows');
-    Route::view('/games', 'home.games')->name('games.index');
+    Route::get('/games', [GamesController::class, 'games'])->name('games');
 
 
     Route::get('/new-popular', [NewAndPopularController::class, 'newAndPopular'])->name('newpopular');

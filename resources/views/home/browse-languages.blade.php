@@ -319,7 +319,7 @@
             </div>
         </div>
 
-        @foreach($collections as $collection)
+        @foreach($videosByLanguage as $collection)
 
         <section class="mb-12 px-10 relative group/section">
 

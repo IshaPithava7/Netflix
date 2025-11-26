@@ -161,7 +161,7 @@
                     <h1 class="text-6xl font-bebas text-white mb-6">{{ $featured->title }}</h1>
                     @endif
 
-                    <p class="text-white text-lg max-w-lg mb-6 shadow-lg">{{ $featured->description }}</p>
+                    <p class="text-white text-lg max-w-lg mb-6">{{ $featured->description }}</p>
 
                     <div class="flex space-x-4">
                         <a href="#" class="flex items-center justify-center bg-white text-black font-bold px-8 py-3 rounded hover:bg-gray-200 transition-colors duration-300">
@@ -236,6 +236,30 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
+            /* ===============================
+                   HERO ANIMATION
+                  =============================== */
+            const $heroVideo = $("#heroVideo");
+            const $heroPoster = $("#heroPoster");
+            const $heroText = $("#heroText");
+            const $titlePoster = $("#titlePoster");
+
+            if ($heroVideo.length && $heroPoster.length && $heroText.length && $titlePoster.length) {
+                setTimeout(() => {
+                    $titlePoster.removeClass("w-[500px]").addClass("w-[300px] transition-all duration-700");
+                    $heroPoster.addClass("opacity-0");
+                    $heroText.hide();
+                    $heroVideo.removeClass("opacity-0").get(0).play();
+                }, 5000);
+
+                $heroVideo.on("ended", function() {
+                    $heroVideo.addClass("opacity-0");
+                    $heroPoster.removeClass("opacity-0");
+                    $titlePoster.removeClass("w-[300px]").addClass("w-[500px]");
+                    $heroText.show();
+                });
+            }
+
             /* ===============================
                 MODAL BEHAVIOR
                =============================== */

@@ -10,15 +10,9 @@ class ProfileService
 {
     public function createProfile(Request $request, array $data): void
     {
-        $avatarPath = null;
-        if ($request->hasFile('avatar')) {
-            $avatarPath = $request->file('avatar')->store('avatars', 'public');
-        }
-
         Auth::user()->profiles()->create([
             'name'   => $data['name'],
-            'avatar' => $avatarPath,
-            'type'   => $data['type'] ?? 'general',
+            'avatar' => $data['avatar'] ?? null,
         ]);
     }
 }

@@ -30,13 +30,7 @@ class AuthService
                     ->with('success', 'Welcome back Admin!');
             }
 
-            if ($user->CustomeSubscription()->where('stripe_status', 'active')->exists()) {
-                return redirect()->route('home')
-                    ->with('success', 'Welcome back! You already have an active plan.');
-            }
-
-            return redirect()->route('subscription.index')
-                ->with('success', 'Welcome! Please choose a plan to continue.');
+            return redirect()->route('profiles.index');
         }
 
         return back()->withErrors(['email' => 'Invalid credentials.']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
 use App\Services\NewAndPopularService;
 
 class NewAndPopularController extends Controller
@@ -16,7 +17,18 @@ class NewAndPopularController extends Controller
     public function NewAndPopular()
     {
 
-        return view('home.new-popular' );
-    }
+        $collections  = Collection::with([
+            'videos' => function ($q) {
+                $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');
+            }
+        ])
+            ->has('videos')
+            ->orderBy('id', 'asc')
+            ->get()
+            ->take(5);
 
+        return view('home.new-popular', [
+            'collections' => $collections,
+        ]);
+    }
 }

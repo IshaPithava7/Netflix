@@ -23,8 +23,7 @@ class StoreProfileRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
-            'type' => 'nullable|string|max:50',
-            'avatar' => 'nullable|image|max:2048',
+            'avatar' => 'nullable|url',
         ];
     }
 }

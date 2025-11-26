@@ -18,9 +18,8 @@
             <li class="{{ request()->routeIs('movies') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
                 <a href="{{ route('movies') }}" class="no-underline! text-white">Movies</a>
             </li>
-
-            <li class="{{ request()->routeIs('games.*') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="{{ route('games.index') }}" class="no-underline! text-white">Games</a>
+            <li class="{{ request()->routeIs('games') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('games') }}" class="no-underline! text-white">Games</a>
             </li>
             <li class="{{ request()->routeIs('newpopular') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
                 <a href="{{ route('newpopular') }}" class="no-underline! text-white">New & Popular</a>

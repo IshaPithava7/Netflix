@@ -1,6 +1,6 @@
 <x-layouts.app>
 
-@section('content')
+    @section('content')
     <!-- Custom Dark Theme CSS -->
     <style>
         /* Default theme dark mode */
@@ -67,13 +67,13 @@
             <h1 class="text-2xl font-bold mb-6">Edit Video</h1>
 
             @if ($errors->any())
-                <div class="bg-red-600 text-white p-3 rounded mb-4">
-                    <ul class="list-disc list-inside">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div class="bg-red-600 text-white p-3 rounded mb-4">
+                <ul class="list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             <form action="{{ route('admin.videos.update', $video) }}" method="POST" enctype="multipart/form-data">
@@ -100,41 +100,41 @@
                     <select name="types[]" id="types" multiple
                         class="w-full p-3 rounded bg-gray-800 text-white select2-dark">
                         @foreach($types as $type)
-                            <option value="{{ $type->id }}" {{ in_array($type->id, $video->types->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                {{ $type->name }}
-                            </option>
+                        <option value="{{ $type->id }}" {{ in_array($type->id, $video->types->pluck('id')->toArray()) ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
                         @endforeach
                     </select>
                     <p class="text-gray-400 text-xs mt-1">Hold Ctrl (Windows) / Cmd (Mac) to select multiple types</p>
                 </div>
 
                 <!-- ✅ Video Collections Multi-Select -->
-<div class="mb-6">
-    <label for="collections" class="block text-sm font-medium mb-1 text-white">
-        Select Collections
-    </label>
-    <select name="collections[]" id="collections" multiple
-        class="w-full p-3 rounded bg-gray-800 text-white select2-dark border border-gray-700">
-        @foreach($collections as $collection)
-            <option value="{{ $collection->id }}"
-                {{ isset($video) && $video->collections->pluck('id')->contains($collection->id) ? 'selected' : '' }}>
-                {{ $collection->title }}
-            </option>
-        @endforeach
-    </select>
-    <p class="text-gray-400 text-xs mt-1">
-        Hold Ctrl (Windows) / Cmd (Mac) to select multiple collections
-    </p>
-</div>
+                <div class="mb-6">
+                    <label for="collections" class="block text-sm font-medium mb-1 text-white">
+                        Select Collections
+                    </label>
+                    <select name="collections[]" id="collections" multiple
+                        class="w-full p-3 rounded bg-gray-800 text-white select2-dark border border-gray-700">
+                        @foreach($collections as $collection)
+                        <option value="{{ $collection->id }}"
+                            {{ isset($video) && $video->collections->pluck('id')->contains($collection->id) ? 'selected' : '' }}>
+                            {{ $collection->title }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <p class="text-gray-400 text-xs mt-1">
+                        Hold Ctrl (Windows) / Cmd (Mac) to select multiple collections
+                    </p>
+                </div>
 
                 <!-- Title Poster -->
                 <div class="mb-6">
                     <label for="title_poster" class="block text-sm font-medium mb-1">Title Poster</label>
                     @if($video->title_poster)
-                        <div class="mb-2">
-                            <img src="{{ asset('storage/' . $video->title_poster) }}" alt="Title Poster" loading="lazy"
-                                class="w-40 h-24 object-cover rounded">
-                        </div>
+                    <div class="mb-2">
+                        <img src="{{ asset('storage/' . $video->title_poster) }}" alt="Title Poster" loading="lazy"
+                            class="w-40 h-24 object-cover rounded">
+                    </div>
                     @endif
                     <input type="file" name="title_poster" id="title_poster"
                         class="w-full text-sm text-gray-300 border border-gray-700 rounded cursor-pointer bg-gray-800 focus:outline-none">
@@ -147,14 +147,30 @@
                     </div>
                 </div>
 
+                <!-- Video URL -->
+                <!-- Video URL -->
+                <div class="mt-4">
+                    <label for="video_url" class="block text-sm font-medium mb-1">Video URL</label>
+
+                    <input id="video_url"
+                        class="block mt-1 w-full text-black rounded p-2 border border-gray-700"
+                        type="file"
+                        name="video_url"
+                        value="{{ old('video_url', $video->video_url) }}">
+
+                    @error('video_url')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- Poster -->
                 <div class="mb-6">
                     <label for="poster" class="block text-sm font-medium mb-1">Poster</label>
                     @if($video->poster)
-                        <div class="mb-2">
-                            <img src="{{ asset('storage/' . $video->poster) }}" alt="Poster" loading="lazy"
-                                class="w-40 h-24 object-cover rounded">
-                        </div>
+                    <div class="mb-2">
+                        <img src="{{ asset('storage/' . $video->poster) }}" alt="Poster" loading="lazy"
+                            class="w-40 h-24 object-cover rounded">
+                    </div>
                     @endif
                     <input type="file" name="poster" id="poster"
                         class="w-full text-sm text-gray-300 border border-gray-700 rounded cursor-pointer bg-gray-800 focus:outline-none">
@@ -170,12 +186,12 @@
                 <div class="mb-6">
                     <label for="video" class="block text-sm font-medium mb-1">Video</label>
                     @if($video->file_path)
-                        <div class="mb-2">
-                            <video controls class="w-full max-h-64 rounded">
-                                <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
+                    <div class="mb-2">
+                        <video controls class="w-full max-h-64 rounded">
+                            <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
                     @endif
                     <input type="file" name="video" id="video"
                         class="w-full text-sm text-gray-300 border border-gray-700 rounded cursor-pointer bg-gray-800 focus:outline-none">
@@ -184,7 +200,7 @@
                         <p class="text-white font-semibold mb-1">Video Preview:</p>
                         <video id="video-preview" class="w-full max-h-64 rounded" controls>
                             @if($video->file_path)
-                                <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
+                            <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
                             @endif
                             Your browser does not support the video tag.
                         </video>
@@ -205,7 +221,7 @@
 
     <!-- JS Preview & Select2 Init -->
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             // Select2 Dark
             $('#types').select2({
                 placeholder: "Select video types",
@@ -215,7 +231,7 @@
             });
 
             // Video preview
-            $('#video').on('change', function () {
+            $('#video').on('change', function() {
                 const file = this.files[0];
                 const $preview = $('#video-preview');
                 const $container = $('#video-preview-container');
@@ -226,7 +242,7 @@
             });
 
             // Poster preview
-            $('#poster').on('change', function () {
+            $('#poster').on('change', function() {
                 const file = this.files[0];
                 const $preview = $('#poster-preview');
                 const $container = $('#poster-preview-container');
@@ -237,7 +253,7 @@
             });
 
             // Title poster preview
-            $('#title_poster').on('change', function () {
+            $('#title_poster').on('change', function() {
                 const file = this.files[0];
                 const $preview = $('#title-poster-preview');
                 const $container = $('#title-poster-preview-container');
@@ -248,6 +264,6 @@
             });
         });
     </script>
-@endsection
+    @endsection
 
 </x-layouts.app>

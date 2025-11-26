@@ -13,6 +13,10 @@ class VideoService
         $data = $this->handleFileUploads($request, $data);
         $data['uploaded_by'] = auth()->id();
 
+        if ($request->filled('video_url')) {
+            $data['video_url'] = $request->input('video_url');
+        }
+
         $video = Video::create($data);
 
         if ($request->has('types')) {
@@ -29,6 +33,10 @@ class VideoService
     public function updateVideo(Request $request, Video $video, array $data): Video
     {
         $data = $this->handleFileUploads($request, $data, $video);
+
+        if ($request->filled('video_url')) {
+            $data['video_url'] = $request->input('video_url');
+        }
 
         $video->update($data);
 

@@ -134,7 +134,7 @@
 
         <div class="min-h-screen text-white mb-12">
 
-            <main class="flex-grow ">
+            <main class="grow">
 
                 {{-- hero banner --}}
                 @if($heroCollection && $heroCollection->videos->isNotEmpty())
@@ -205,13 +205,13 @@
                             @endif
 
                             {{-- Overlay --}}
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                            <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
 
                             <div class="absolute inset-0 pointer-events-none">
 
                                 <!-- Bottom blur/fade -->
                                 <div
-                                    class="absolute bottom-0 left-0 w-full h-15 bg-gradient-to-t from-[#181818] to-transparent ">
+                                    class="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-[#181818] to-transparent ">
                                 </div>
                             </div>
 
@@ -226,7 +226,7 @@
                                 <!-- Buttons -->
                                 <div class="flex space-x-4">
                                     <button
-                                        class="bg-[#FFFFFF] text-black font-bold w-[126px] h-[46px] !rounded-md justify-center hover:bg-[#C3C1C1] transition duration-300 flex items-center space-x-2">
+                                        class="bg-[#FFFFFF] text-black font-bold w-[126px] h-[46px] rounded-md! justify-center hover:bg-[#C3C1C1] transition duration-300 flex items-center space-x-2">
                                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
                                             <path
                                                 d="M5 2.69127C5 1.93067 5.81547 1.44851 6.48192 1.81506L23.4069 11.1238C24.0977 11.5037 24.0977 12.4963 23.4069 12.8762L6.48192 22.1849C5.81546 22.5515 5 22.0693 5 21.3087V2.69127Z"
@@ -242,7 +242,7 @@
 
                                     <!-- hero banner -->
                                     <button id="moreInfoBtn"
-                                        class=" bg-[#6d6d6e] mr-0.5 !text-[#ffffff] opacity-[0.7] font-bold w-[172px] h-[46px] !rounded-md justify-center hover:bg-[#403A36] transition duration-300 flex items-center space-x-2"
+                                        class=" bg-[#6d6d6e] mr-0.5 text-[#ffffff]! opacity-[0.7] font-bold w-[172px] h-[46px] rounded-md! justify-center hover:bg-[#403A36] transition duration-300 flex items-center space-x-2"
                                         data-video-id="{{ $featured->id }}" data-title="{{ $featured->title }}"
                                         data-description="{{ $featured->description }}"
                                         data-duration="{{ $featured->duration ?? '1h 52m' }}" data-poster="{{ $poster }}"
@@ -257,7 +257,7 @@
                                                 fill="currentColor"></path>
 
                                         </svg>
-                                        <span class="!text-[#ffffff]">More Info</span>
+                                        <span class="text-[#ffffff]!">More Info</span>
                                     </button>
                                 </div>
                             </div>

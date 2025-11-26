@@ -69,8 +69,8 @@
 
                             {{-- Popular Badge --}}
                             @if($index === 1 || strtolower($plan->name) === 'basic')
-                            <div class="absolute -top-0 left-0 right-0 flex justify-center z-10">
-                                <span class="bg-gradient-to-r from-purple-600 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-b-md">
+                            <div class="absolute top-0 left-0 right-0 flex justify-center z-10">
+                                <span class="bg-linear-to-t from-purple-600 to-purple-500 text-white text-[10px] font-bold px-3 py-1 rounded-b-md">
                                     Most Popular
                                 </span>
                             </div>

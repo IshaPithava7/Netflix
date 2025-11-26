@@ -133,7 +133,7 @@
     </style>
 
     <div class="bg-[#141414] min-h-screen text-white mb-12">
-        <main class="flex-grow ">
+        <main class="grow">
 
             {{-- hero banner --}}
             @if($heroCollection && $heroCollection->videos->isNotEmpty())
@@ -151,6 +151,57 @@
             @endphp
 
             <section class="relative mb-12">
+                <div id="moviesHeader"
+                    class="sticky top-0 mt-[70px] z-10 bg-transparent px-8 md:px-16 transition-colors duration-300 py-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <h1 class="text-4xl md:text-5xl font-black text-white mr-10">
+                                Movies
+                            </h1>
+                            <!-- Genres Dropdown (Real Netflix Style) -->
+                            <div id="genres-dropdown" class="relative inline-block">
+                                <button id="genres-button"
+                                    class="flex items-center bg-black border border-gray-500 p-1 text-white font-medium hover:border-white transition">
+                                    <span>Genres</span>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                                <div id="genres-menu"
+                                    class="absolute left-0 mt-2 w-[700px] bg-black bg-opacity-90 border border-gray-700 rounded-md shadow-2xl transition-all duration-300 z-50 opacity-0 invisible p-6">
+                                    <div class="grid grid-cols-3 gap-x-8 gap-y-2">
+                                        @foreach($collectionGenre as $column)
+                                        <div class="flex flex-col space-y-2">
+                                            @foreach($column as $genre)
+                                            <a href="#"
+                                                class="text-gray-300 hover:underline whitespace-nowrap">
+                                                {{ $genre }}
+                                            </a>
+                                            @endforeach
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="p-1 border border-gray-500 rounded-sm">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                        d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+                            <button class="p-1 border border-gray-500 rounded-sm">
+                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                        d="M4 6h16M4 12h16M4 18h7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="relative w-full h-[800px] overflow-hidden shadow-2xl">
                     <!-- Poster -->
@@ -168,13 +219,13 @@
                     @endif
 
                     {{-- Overlay --}}
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                    <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent"></div>
 
                     <div class="absolute inset-0 pointer-events-none">
 
                         <!-- Bottom blur/fade -->
                         <div
-                            class="absolute bottom-0 left-0 w-full h-15 bg-gradient-to-t from-[#181818] to-transparent ">
+                            class="absolute bottom-0 left-0 w-full h-15 bg-linear-to-t from-[#181818] to-transparent ">
                         </div>
                     </div>
 
@@ -189,7 +240,7 @@
                         <!-- Buttons -->
                         <div class="flex space-x-4">
                             <button
-                                class="bg-[#FFFFFF] text-black font-bold w-[126px] h-[46px] !rounded-md justify-center hover:bg-[#C3C1C1] transition duration-300 flex items-center space-x-2">
+                                class="bg-[#FFFFFF] text-black font-bold w-[126px] h-[46px] rounded-md! justify-center hover:bg-[#C3C1C1] transition duration-300 flex items-center space-x-2">
                                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
                                     <path
                                         d="M5 2.69127C5 1.93067 5.81547 1.44851 6.48192 1.81506L23.4069 11.1238C24.0977 11.5037 24.0977 12.4963 23.4069 12.8762L6.48192 22.1849C5.81546 22.5515 5 22.0693 5 21.3087V2.69127Z"
@@ -205,7 +256,7 @@
 
                             <!-- hero banner -->
                             <button id="moreInfoBtn"
-                                class=" bg-[#6d6d6e] mr-0.5 !text-[#ffffff] opacity-[0.7] font-bold w-[172px] h-[46px] !rounded-md justify-center hover:bg-[#403A36] transition duration-300 flex items-center space-x-2"
+                                class=" bg-[#6d6d6e] mr-0.5 text-[#ffffff]! opacity-[0.7] font-bold w-[172px] h-[46px] rounded-md! justify-center hover:bg-[#403A36] transition duration-300 flex items-center space-x-2"
                                 data-video-id="{{ $featured->id }}" data-title="{{ $featured->title }}"
                                 data-description="{{ $featured->description }}"
                                 data-duration="{{ $featured->duration ?? '1h 52m' }}" data-poster="{{ $poster }}"
@@ -220,7 +271,7 @@
                                         fill="currentColor"></path>
 
                                 </svg>
-                                <span class="!text-[#ffffff]">More Info</span>
+                                <span class="text-[#ffffff]!">More Info</span>
                             </button>
                         </div>
                     </div>
