@@ -50,6 +50,14 @@ class HomeController extends Controller
             ->filter(fn($c) => $c->videos->isNotEmpty())
             ->values();
 
+        $myListIdsMap = [];
+        if ($user) {
+            $myListIds = $user->myListVideos()
+                ->pluck('videos.id')
+                ->toArray();
+
+            $myListIdsMap = array_flip($myListIds);
+        }
 
         return view('home.home', [
             // 'user' => $user,
@@ -58,7 +66,7 @@ class HomeController extends Controller
             'mainCollections' => $mainCollections,
             'heroCollection' => $heroCollection,
             'top10Collection' => $top10Collection,
-            // 'myListIds' => $myListIdsMap,
+            'myListIds' => $myListIdsMap,
         ]);
     }
 

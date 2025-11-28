@@ -136,7 +136,7 @@
         <main class="grow ">
 
             {{-- hero banner --}}
-            @if($heroCollection && $heroCollection->videos->isNotEmpty())
+           @if($heroCollection && $heroCollection->videos->isNotEmpty())
             @php
             $featured = $heroCollection->videos->first();
             $poster = $featured->poster ? (filter_var($featured->poster, FILTER_VALIDATE_URL) ? $featured->poster : asset('storage/' . $featured->poster)) : '';
@@ -193,7 +193,6 @@
                 @endforeach
             </div>
 
-
             <!-- Skeleton Loader (6 Cards) -->
             <div id="loader" role="status" class="grid grid-cols-6 ml-20 animate-pulse">
                 <!-- Card 1 -->
@@ -222,9 +221,6 @@
                     <div class="w-60 h-[150px] bg-gray-300 rounded-md dark:bg-[#101828]"></div>
                 </div>
             </div>
-
-
-
         </main>
     </div>
 

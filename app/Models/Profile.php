@@ -10,6 +10,7 @@ class Profile extends Model
         'user_id',
         'name',
         'avatar',
+        'is_kid',
     ];
 
     /**

@@ -12,6 +12,7 @@ class VideoService
     {
         $data = $this->handleFileUploads($request, $data);
         $data['uploaded_by'] = auth()->id();
+        $data['for_kids'] = $request->has('for_kids');
 
         if ($request->filled('video_url')) {
             $data['video_url'] = $request->input('video_url');

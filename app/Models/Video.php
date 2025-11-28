@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\ForKidsScope;
 
 class Video extends Model
 {
@@ -27,6 +28,11 @@ class Video extends Model
     public function usersAdded()
     {
         return $this->belongsToMany(User::class, 'user_video')->withTimestamps();
+    }
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new ForKidsScope);
     }
 
     public function types()

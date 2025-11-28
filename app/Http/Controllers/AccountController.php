@@ -22,6 +22,12 @@ class AccountController extends Controller
         return view('account.pages.overview', $data);
     }
 
+    public function profiles()
+    {
+        $profiles = auth()->user()->profiles;
+        return view('account.pages.profiles', compact('profiles'));
+    }
+
     protected function getSubscriptionData($user)
     {
         $subscription = $user->subscriptions()

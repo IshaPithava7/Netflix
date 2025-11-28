@@ -6,7 +6,7 @@
             <h1 class="text-5xl text-white mb-8">Manage Profiles</h1>
             <div class="flex space-x-8">
                 @foreach($profiles as $profile)
-                <a href="{{ route('profiles.edit', $profile) }}">
+                <a href="{{ route('profiles.edit', $profile) }}" class="no-underline!">
                     <div class="text-center">
                         <div class="w-32 h-32 bg-gray-700 rounded-md mb-2 relative">
                             @if($profile->avatar)
@@ -24,7 +24,7 @@
                 @endforeach
             </div>
             <div class="mt-8">
-                <a href="{{ route('profiles.index') }}" class="text-white bg-red-600 px-4 py-2 rounded-md hover:bg-red-700">Done</a>
+                <a href="{{ route('profiles.index') }}" class="text-white bg-red-600 px-4 py-2 rounded-md hover:bg-red-700 no-underline!">Done</a>
             </div>
         </div>
     </div>

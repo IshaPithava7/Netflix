@@ -94,6 +94,12 @@
                 <input type="text" name="title" id="title" class="w-full p-3 rounded bg-gray-800 text-white" required>
             </div>
 
+            <!-- For Kids -->
+            <div class="flex items-center">
+                <input type="checkbox" name="for_kids" id="for_kids" value="1" class="rounded">
+                <label for="for_kids" class="ml-2 text-white">For Kids</label>
+            </div>
+
             <!-- Video URL -->
             <div class="mt-4">
                 <label for="video_url">Video URL</label>
@@ -110,8 +116,7 @@
             <!-- Video Upload -->
             <div>
                 <label for="video" class="block text-white font-semibold mb-1">Upload Video (MP4, MOV, AVI)</label>
-                <input type="file" name="video" id="video" accept=".mp4,.mov,.avi"
-                    class="w-full p-3 rounded bg-gray-800 text-white" required>
+                <input type="file" name="video" id="video" accept=".mp4,.mov,.avi" class="w-full p-3 rounded bg-gray-800 text-white">
             </div>
 
             <!-- Video Preview -->

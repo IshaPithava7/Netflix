@@ -4,6 +4,7 @@ use App\Http\Controllers\browseBylanguageController;
 use App\Http\Controllers\NewAndPopularController;
 use App\Http\Controllers\ShowsController;
 use App\Http\Controllers\GamesController;
+use App\Http\Controllers\KidsModeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
@@ -183,31 +184,28 @@ Route::middleware($middlewares)->group(function () {
 
     Route::get('/browse-languages', [browseBylanguageController::class, 'browseBylanguage'])->name('browse.languages');
     Route::get('/movies', [MoviesController::class, 'movies'])->name('movies');
+});
 
-   
+Route::middleware(['web', 'auth'])->group(function () {
+    Route::get('/kids/toggle', [KidsModeController::class, 'toggle'])->name('kids.toggle');
+});
 
 
-    /*
-    |--------------------------------------------------------------------------
-    | Account Pages
-    |--------------------------------------------------------------------------
-    */
+/*
+|--------------------------------------------------------------------------
+| Account Pages
+|--------------------------------------------------------------------------
+*/
+Route::middleware($middlewares)->group(function () {
     Route::prefix('account')->group(function () {
         Route::get('/overview', [AccountController::class, 'overview'])->name('overview');
         Route::get('/membership', [AccountController::class, 'membership'])->name('membership');
         Route::view('/security', 'account.pages.security')->name('security');
         Route::view('/devices', 'account.pages.devices')->name('devices');
-        Route::view('/profiles', 'account.pages.profiles')->name('profiles');
+        Route::get('/profiles', [AccountController::class, 'profiles'])->name('profiles');
     });
 
     // Password change
     Route::get('/password/edit', [PasswordController::class, 'edit'])->name('password.edit');
     Route::put('/password/update', [PasswordController::class, 'update'])->name('password.change');
-
 });
-
-
-
-
-
-

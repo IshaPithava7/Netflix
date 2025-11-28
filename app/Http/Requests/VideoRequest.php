@@ -26,7 +26,7 @@ class VideoRequest extends FormRequest
         $isUpdate = $this->video ? true : false;
 
         return [
-            'title' => 'required|string|max:255',
+            'title' => 'required|string',
             'description' => 'nullable|string',
             'video_url' => 'nullable|url',
 
@@ -36,10 +36,10 @@ class VideoRequest extends FormRequest
             'collections' => 'nullable|array',
             'collections.*' => 'exists:collections,id',
 
-            'video' => ($isUpdate ? 'nullable' : 'required').'|mimes:mp4,mov,avi,webm,mkv|max:2097152',
+            'video' => ($isUpdate ? 'nullable' : 'required') . '|mimes:mp4,mov,avi,webm,mkv',
 
-            'poster' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:102400',
-            'title_poster' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:102400',
+            'poster' => 'nullable|image|mimes:jpeg,png,jpg,webp',
+            'title_poster' => 'nullable|image|mimes:jpeg,png,jpg,webp',
         ];
     }
 }

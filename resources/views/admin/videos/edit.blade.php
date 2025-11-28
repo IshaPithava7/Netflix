@@ -87,7 +87,13 @@
                         class="w-full bg-gray-800 border border-gray-700 rounded px-3 py-2 focus:outline-none focus:border-red-500">
                 </div>
 
-                <!-- Description -->
+                <!-- For Kids -->
+                <div class="flex items-center mb-4">
+                    <input type="checkbox" name="for_kids" id="for_kids" value="1" class="rounded" @if($video->for_kids) checked @endif>
+                    <label for="for_kids" class="ml-2 text-white">For Kids</label>
+                </div>
+
+                <!-- Video URL -->
                 <div class="mb-4">
                     <label for="description" class="block text-sm font-medium mb-1">Description</label>
                     <textarea name="description" id="description" rows="4"

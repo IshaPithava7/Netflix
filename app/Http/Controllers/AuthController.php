@@ -83,6 +83,10 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
+    public function showForgotPassword()
+    {
+        return view('layouts.auth.forgot-password');
+    }
 
     public function sendResetLinkEmail(AuthRequest $AuthRequest)
     {

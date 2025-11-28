@@ -1,3 +1,68 @@
+@if(session('kids_mode'))
+<header id="navbar" class="flex items-center justify-between h-16 w-full px-14 fixed top-0 z-50 transition-colors duration-700 bg-transparent">
+    {{-- Logo Section --}}
+    <div class="flex items-center shrink-0">
+        <a href="{{ route('kids.home') }}">
+            <img src="{{ asset('storage/logo/Logonetflix.png') }}" alt="Netflix Logo" loading="lazy" class="w-[100px] h-auto">
+        </a>
+    </div>
+
+    {{-- Navigation Menu --}}
+    <nav class="flex items-center flex-1 ml-[15px] pt-3">
+        <ul class="flex items-center space-x-5 text-sm">
+            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">Home</a>
+            </li>
+            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">Characters</a>
+            </li>
+            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">Shows</a>
+            </li>
+            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">Movies</a>
+            </li>
+             <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">New $ Popular</a>
+            </li>
+             <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">My List</a>
+            </li>
+             <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="#" class="no-underline! text-white">Browse By Languages</a>
+            </li>
+        </ul>
+    </nav>
+
+    {{-- Right Side Icons --}}
+    <div class="flex items-center content-around space-x-4 ml-auto pt-[15px]">
+        {{-- Search Icon --}}
+        <div class="flex justify-end">
+            <!-- Search Container -->
+            <div id="searchContainer" class="flex items-center overflow-hidden transition-all duration-300 bg-transparent">
+                <!-- Search Icon -->
+                <button id="searchIcon" class="cursor-pointer p-2 text-white hover:text-gray-300 transition-colors duration-200 shrink-0">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z" fill="currentColor"></path>
+                    </svg>
+                </button>
+                <!-- Search Input -->
+                <input type="text" id="searchInput" placeholder="Titles, people, genres" class="flex-0 w-0 opacity-0 bg-black text-white text-sm  py-2 placeholder-gray-400 transition-all duration-300 focus:outline-none" />
+            </div>
+        </div>
+
+        {{-- Kids Profile Icon --}}
+        <div class="text-white text-sm hover:text-gray-300 transition-colors duration-200 no-underline!">
+            <img src="{{ asset('storage/kids/navbar_kids.png') }}" alt="Kids Profile" class="w-8 h-8 rounded">
+        </div>
+
+        {{-- Exit Kids Button --}}
+        <a href="{{ route('kids.exit') }}" class="text-white text-sm hover:text-gray-300 transition-colors duration-200 no-underline! px-4 py-2 bg-red-600 rounded">
+            Exit Children
+        </a>
+    </div>
+</header>
+@else
 <header id="navbar" class="flex items-center justify-between h-16 w-full px-14 fixed top-0 z-50 transition-colors duration-700">
     {{-- Logo Section --}}
     <div class="flex items-center shrink-0">
@@ -54,7 +119,7 @@
         </div>
 
         {{-- Children Link --}}
-        <a href="#" class="text-white text-sm hover:text-gray-300 transition-colors duration-200 no-underline!">
+        <a href="{{ route('kids.home') }}" class="text-white text-sm hover:text-gray-300 transition-colors duration-200 no-underline!">
             Children
         </a>
 
@@ -135,7 +200,11 @@
         <div id="profileWrapper" class="relative inline-block">
 
             <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none group">
+                @if($selectedProfile && $selectedProfile->avatar)
+                <img src="{{ $selectedProfile->avatar }}" alt="Profile" loading="lazy" class="rounded w-8 h-8">
+                @else
                 <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="Profile" loading="lazy" class="rounded w-8 h-8">
+                @endif
                 <svg id="dropdownIcon" class="w-4 h-4 text-white transition-transform group-hover:rotate-180 duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -146,35 +215,20 @@
 
                 {{-- Profile List --}}
                 <div class="py-2 border-b border-gray-800">
-                    {{-- Profile 1 --}}
-                    <a href="#" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
-                        <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="profile" loading="lazy" class="w-8 h-8 rounded mr-3">
-                        <span class="text-white text-sm">Profile 1</span>
-                    </a>
-
-                    {{-- Profile 2 --}}
-                    <a href="#" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
-                        <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="profile" loading="lazy" class="w-8 h-8 rounded mr-3">
-                        <span class="text-white text-sm">Profile 2</span>
-                    </a>
-
-                    {{-- Profile 3 --}}
-                    <a href="#" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
-                        <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="profile" loading="lazy" class="w-8 h-8 rounded mr-3">
-                        <span class="text-white text-sm">Profile 3</span>
-                    </a>
-
-                    {{-- Profile 4 - Children --}}
-                    <a href="#" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
-                        <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="Children" loading="lazy" class="w-8 h-8 rounded mr-3">
-                        <span class="text-white text-sm">Children</span>
-                    </a>
+                    @if(isset($profiles))
+                        @foreach($profiles as $profile)
+                        <a href="{{ route('profiles.switch', $profile) }}" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
+                            <img src="{{ $profile->avatar ?? asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="profile" loading="lazy" class="w-8 h-8 rounded mr-3">
+                            <span class="text-white text-sm">{{ $profile->name }}</span>
+                        </a>
+                        @endforeach
+                    @endif
                 </div>
 
                 {{-- Management Options --}}
                 <div class="py-2 border-b border-gray-800">
                     {{-- Manage Profiles --}}
-                    <a href="#" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
+                    <a href="{{ route('profiles') }}" class="flex items-center px-2 py-1 hover:bg-white/10 transition no-underline!">
                         <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
@@ -222,3 +276,4 @@
 </header>
 
 <script src="{{ asset('assets/js/navbar.js') }} "></script>
+@endif

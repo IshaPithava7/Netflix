@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\View\Composers\ProfileComposer;
+use App\View\Composers\AccountComposer;
 use Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 
@@ -35,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('layouts.app.navbar', 'navbar');
         Blade::component('layouts.app.footer', 'footer');
 
+        View::composer('layouts.app.navbar', ProfileComposer::class);
+        View::composer('account.account', AccountComposer::class);
     }
 }
 

@@ -9,7 +9,7 @@
                     <label class="block text-white text-sm font-bold mb-2" for="name">
                         Profile Name
                     </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="Profile Name">
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="Profile Name">
                 </div>
 
                 <div class="mb-4">
@@ -30,7 +30,7 @@
                     <button class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                         Create Profile
                     </button>
-                    <a class="inline-block align-baseline font-bold text-sm text-red-600 hover:text-red-800" href="{{ route('profiles.index') }}">
+                    <a class="no-underline! inline-block align-baseline font-bold text-sm text-red-600 hover:text-red-800" href="{{ route('profiles.index') }}">
                         Cancel
                     </a>
                 </div>

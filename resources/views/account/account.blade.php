@@ -23,8 +23,13 @@
 
         <div class=" flex items-center shrink-0">
             <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none group">
+                @if($selectedProfile && $selectedProfile->avatar)
+                <img src="{{ $selectedProfile->avatar }}" alt="Profile" loading="lazy"
+                    class="rounded w-8 h-8">
+                @else
                 <img src="{{ asset('storage/netflix-avatar/Netflix-avatar.png') }}" alt="Profile" loading="lazy"
                     class="rounded w-8 h-8">
+                @endif
                 <svg viewBox="0 0 16 16" width="16" height="16" data-icon="CaretDownSmall" data-icon-id=":rn:"
                     data-uia="account+header+menu+Icon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                     fill="none" role="img">
@@ -38,10 +43,12 @@
             <div id="dropdownMenu"
                 class="hidden absolute top-full right-40 w-56 bg-white rounded-lg shadow-2xl border border-gray-200 overflow-hidden z-50"
                 style="transform-origin: top right;">
+                
 
+                
                 {{-- Back to Netflix --}}
                 <a href="{{ route('home') }}"
-                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition border-b border-gray-200 group no-underline!">
+                    class="flex items-center gap-3 px-3 py-3 hover:bg-gray-50 transition border-t border-gray-200 group no-underline!">
                     <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
@@ -85,7 +92,7 @@
                 </a>
 
                 {{-- Switch Profile --}}
-                <a href="#"
+                <a href="{{ route('profiles.index') }}"
                     class="flex items-center justify-between w-full px-3 py-3 hover:bg-gray-50 transition group no-underline!">
                     <span class="font-medium text-gray-900">Switch Profile</span>
                     <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
