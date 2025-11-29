@@ -17,8 +17,6 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->name('admin.')                    // <-- Route name prefix (optional)            
                 ->group(base_path('routes/admin.php'));
 
-            Route::middleware('web')
-                ->group(base_path('routes/kids.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {

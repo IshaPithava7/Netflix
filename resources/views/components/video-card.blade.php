@@ -15,16 +15,16 @@ $poster = asset('storage/' . $poster);
         </div>
         <div class="hover-card absolute left-1/2 top-0 w-[320px] rounded-lg overflow-hidden shadow-2xl bg-[#181818]">
             <div class="relative">
-                @if($video->file_path)
+                @if($video->trailer)
                 <video class="w-full h-[180px] object-cover" preload="none" autoplay muted loop poster="{{ $poster }}">
-                    <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
+                    <source src="{{ asset('storage/' . $video->trailer) }}" type="video/mp4">
                 </video>
                 @else
                 <img src="{{ $poster }}" alt="{{ $video->title }}" class="w-full h-[180px] object-cover" loading="lazy">
                 @endif
                 <div class="absolute inset-0 bg-linear-to-t from-[#181818] via-transparent to-transparent"></div>
-                @if($video->title_poster)
-                <img src="{{ asset('storage/' . $video->title_poster) }}" alt="{{ $video->title }}" loading="lazy" class="absolute bottom-3 left-4 w-auto h-10 object-contain drop-shadow-lg">
+                @if($video->mini_poster)
+                <img src="{{ asset('storage/' . $video->mini_poster) }}" alt="{{ $video->title }}" loading="lazy" class="absolute bottom-3 left-4 w-auto h-10 object-contain drop-shadow-lg">
                 @endif
             </div>
             <div class="p-4 space-y-3">
@@ -75,9 +75,9 @@ $poster = $video->poster && !filter_var($video->poster, FILTER_VALIDATE_URL)
 <div class="group relative z-0 hover:z-9999! transition-[z-index] duration-0 hover:delay-0 delay-300">
 
     <div class="relative bg-[#1a1a1a] rounded-xs overflow-hidden aspect-video shadow-lg transition-all duration-300 ease-in-out cursor-pointer">
-        @if($video->file_path)
+        @if($video->trailer)
         <video class="w-full h-full object-cover" muted poster="{{ $poster }}">
-            <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
+            <source src="{{ asset('storage/' . $video->trailer) }}" type="video/mp4">
         </video>
         @elseif($poster)
         <img src="{{ $poster }}" alt="{{ $video->title }}" class="w-full h-full object-cover" loading="lazy">
@@ -87,9 +87,9 @@ $poster = $video->poster && !filter_var($video->poster, FILTER_VALIDATE_URL)
     <div class="absolute -top-40px left-1/2 -translate-x-1/2 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 ease-in-out group-hover:delay-500 w-[300px] rounded-lg overflow-hidden shadow-2xl bg-[#181818] group-hover:scale-110 origin-top pointer-events-none group-hover:pointer-events-auto z-9999">
 
         <div class="relative aspect-video">
-            @if($video->file_path)
+            @if($video->trailer)
             <video class="w-full h-full object-cover" autoplay muted loop poster="{{ $poster }}">
-                <source src="{{ asset('storage/' . $video->file_path) }}" type="video/mp4">
+                <source src="{{ asset('storage/' . $video->trailer) }}" type="video/mp4">
             </video>
             @elseif($poster)
             <img src="{{ $poster }}" alt="{{ $video->title }}" class="w-full h-full object-cover" loading="lazy">

@@ -2,7 +2,7 @@
 <header id="navbar" class="flex items-center justify-between h-16 w-full px-14 fixed top-0 z-50 transition-colors duration-700 bg-transparent">
     {{-- Logo Section --}}
     <div class="flex items-center shrink-0">
-        <a href="{{ route('kids.home') }}">
+        <a href="{{ route('pages.home') }}">
             <img src="{{ asset('storage/logo/Logonetflix.png') }}" alt="Netflix Logo" loading="lazy" class="w-[100px] h-auto">
         </a>
     </div>
@@ -10,26 +10,26 @@
     {{-- Navigation Menu --}}
     <nav class="flex items-center flex-1 ml-[15px] pt-3">
         <ul class="flex items-center space-x-5 text-sm">
-            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">Home</a>
+            <li class="{{ request()->routeIs('pages.home') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.home') }}" class="no-underline! text-white">Home</a>
             </li>
-            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">Characters</a>
+            <li class="{{ request()->routeIs('pages.characters') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.characters') }}" class="no-underline! text-white">Characters</a>
             </li>
-            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">Shows</a>
+            <li class="{{ request()->routeIs('pages.shows') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.shows') }}" class="no-underline! text-white">Shows</a>
             </li>
-            <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">Movies</a>
+            <li class="{{ request()->routeIs('pages.movies') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.movies') }}" class="no-underline! text-white">Movies</a>
             </li>
-             <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">New $ Popular</a>
+             <li class="{{ request()->routeIs('pages.newpopular') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.newpopular') }}" class="no-underline! text-white">New &amp; Popular</a>
             </li>
-             <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">My List</a>
+             <li class="{{ request()->routeIs('pages.mylist') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.mylist') }}" class="no-underline! text-white">My List</a>
             </li>
-             <li class="text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="#" class="no-underline! text-white">Browse By Languages</a>
+             <li class="{{ request()->routeIs('pages.browse_languages') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
+                <a href="{{ route('pages.browse_languages') }}" class="no-underline! text-white">Browse By Languages</a>
             </li>
         </ul>
     </nav>
@@ -87,7 +87,7 @@
                 <a href="{{ route('games') }}" class="no-underline! text-white">Games</a>
             </li>
             <li class="{{ request()->routeIs('newpopular') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
-                <a href="{{ route('newpopular') }}" class="no-underline! text-white">New & Popular</a>
+                <a href="{{ route('newpopular') }}" class="no-underline! text-white">New &amp; Popular</a>
             </li>
             <li class="{{ request()->routeIs('mylist.index') ? 'font-bold' : '' }} text-white hover:text-gray-300 cursor-pointer transition-colors duration-200">
                 <a href="{{ route('mylist.index') }}" class="no-underline! text-white">My List</a>
@@ -119,7 +119,7 @@
         </div>
 
         {{-- Children Link --}}
-        <a href="{{ route('kids.home') }}" class="text-white text-sm hover:text-gray-300 transition-colors duration-200 no-underline!">
+        <a href="{{ route('pages.home') }}" class="text-white text-sm hover:text-gray-300 transition-colors duration-200 no-underline!">
             Children
         </a>
 

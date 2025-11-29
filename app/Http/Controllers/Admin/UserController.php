@@ -16,6 +16,23 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+
+    public function store(UserRequest $userRequest)
+    {
+        $validateData = $userRequest->validated();
+
+        $user = User::create($validateData);
+
+        return response()->json([
+            'message' => 'User created successfully.',
+            'user' => $user
+        ], 201);
+    }
+
     public function edit(User $user)
     {
         return view('admin.users.edit', compact('user'));
@@ -33,13 +50,16 @@ class UserController extends Controller
                 'email' => $user->email,
             ]);
         }
-        return redirect()->route('admin.users.index')->with('success', 'User updated successfully.');
+        return response()->json([
+            'message' => 'User updated successfully.',
+            'user' => $user
+        ]);
     }
 
     public function destroy(User $user)
     {
         if (auth()->id() === $user->id) {
-            return back()->with('error', 'You cannot delete your own account.');
+            return response()->json(['message' => 'You cannot delete your own account.'], 403);
         }
 
         try {
@@ -57,13 +77,11 @@ class UserController extends Controller
 
             $user->delete();
 
-            return redirect()
-                ->route('admin.users.index')
-                ->with('success', 'User deleted successfully.');
+            return response()->json(['message' => 'User deleted successfully.']);
 
         } catch (\Exception $e) {
 
-            return back()->with('error', 'Failed to delete user: ' . $e->getMessage());
+            return response()->json(['message' => 'Failed to delete user: ' . $e->getMessage()], 500);
         }
     }
 

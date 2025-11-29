@@ -7,6 +7,7 @@ use App\Http\Controllers\GamesController;
 use App\Http\Controllers\KidsModeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Kids\KidsHomeController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\PaymentController;
@@ -181,13 +182,26 @@ Route::middleware($middlewares)->group(function () {
 
 
     Route::get('/new-popular', [NewAndPopularController::class, 'newAndPopular'])->name('newpopular');
-
     Route::get('/browse-languages', [browseBylanguageController::class, 'browseBylanguage'])->name('browse.languages');
+    // Preview pages for navbar links (simple placeholders)
+    Route::get('/pages/home', [KidsHomeController::class, 'index'])->name('pages.home');
+    Route::get('/pages/shows', [App\Http\Controllers\Kids\ShowController::class, 'index'])->name('pages.shows');
+    Route::get('/pages/characters', [App\Http\Controllers\Kids\CharactersController::class, 'index'])->name('pages.characters');
+    Route::get('/pages/movies', [App\Http\Controllers\Kids\MovieController::class, 'index'])->name('pages.movies');
+    Route::get('/pages/newpopular', [App\Http\Controllers\Kids\NewPopularController::class, 'index'])->name('pages.newpopular');
+    Route::get('/pages/mylist', [App\Http\Controllers\Kids\MyListController::class, 'index'])->name('pages.mylist');
+    Route::get('/pages/browse-languages', [App\Http\Controllers\Kids\BrowseLanguagesController::class, 'index'])->name('pages.browse_languages');
     Route::get('/movies', [MoviesController::class, 'movies'])->name('movies');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/kids/exit', [KidsHomeController::class, 'exit'])->name('kids.exit');
 });
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/kids/toggle', [KidsModeController::class, 'toggle'])->name('kids.toggle');
+    // Theme preview routes (simple blades)
 });
 
 

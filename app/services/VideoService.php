@@ -59,10 +59,19 @@ class VideoService
     private function handleFileUploads(Request $request, array $data, Video $video = null): array
     {
         if ($request->hasFile('video')) {
-            if ($video && $video->file_path) {
-                Storage::disk('public')->delete($video->file_path);
+            if ($video && $video->trailer) {
+                Storage::disk('public')->delete($video->trailer);
             }
-            $data['file_path'] = $request->file('video')->store('videos', 'public');
+            $data['trailer'] = $request->file('video')->store('videos', 'public');
+        }
+
+        // support uploaded file for origin_movie (form uses file input named origin_movie)
+        // store origin_movie uploads in a separate folder so they are not mixed with main video files
+        if ($request->hasFile('origin_movie')) {
+            if ($video && $video->origin_movie) {
+                Storage::disk('public')->delete($video->origin_movie);
+            }
+            $data['origin_movie'] = $request->file('origin_movie')->store('video_urls', 'public');
         }
 
         if ($request->hasFile('poster')) {
@@ -72,11 +81,11 @@ class VideoService
             $data['poster'] = $request->file('poster')->store('video_posters', 'public');
         }
 
-        if ($request->hasFile('title_poster')) {
-            if ($video && $video->title_poster) {
-                Storage::disk('public')->delete($video->title_poster);
+        if ($request->hasFile('mini_poster')) {
+            if ($video && $video->mini_poster) {
+                Storage::disk('public')->delete($video->mini_poster);
             }
-            $data['title_poster'] = $request->file('title_poster')->store('title_posters', 'public');
+            $data['mini_poster'] = $request->file('mini_poster')->store('title_posters', 'public');
         }
         return $data;
     }

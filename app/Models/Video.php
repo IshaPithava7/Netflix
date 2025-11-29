@@ -13,11 +13,11 @@ class Video extends Model
     protected $fillable = [
         'title',
         'description',
-        'file_path',
-        'title_poster',
+        'trailer',
+        'origin_movie',
+        'mini_poster',
         'uploaded_by',
-        'poster',
-        'tmdb_id'
+        'poster'
     ];
 
     public function uploader()

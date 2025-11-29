@@ -159,7 +159,7 @@
                     <label for="video_url" class="block text-sm font-medium mb-1">Video URL</label>
 
                     <input id="video_url"
-                        class="block mt-1 w-full text-black rounded p-2 border border-gray-700"
+                        class="block mt-1 w-full text-white bg-gray-800 rounded p-2 border border-gray-700"
                         type="file"
                         name="video_url"
                         value="{{ old('video_url', $video->video_url) }}">
@@ -267,6 +267,46 @@
                     $preview.attr('src', URL.createObjectURL(file));
                     $container.removeClass('hidden');
                 }
+            });
+
+            // AJAX form submission
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+
+                // Clear previous errors
+                $('.error-message').remove();
+                $('.border-red-500').removeClass('border-red-500');
+
+                let form = $(this);
+                let formData = new FormData(this);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Show success message
+                        alert('Video updated successfully!');
+                        // Redirect to the videos index page
+                        window.location.href = "{{ route('admin.videos.index') }}";
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 422) {
+                            // Handle validation errors
+                            let errors = xhr.responseJSON.errors;
+                            $.each(errors, function(key, value) {
+                                let element = $('#' + key);
+                                element.addClass('border-red-500');
+                                element.after('<p class="text-red-500 text-xs mt-1 error-message">' + value[0] + '</p>');
+                            });
+                        } else {
+                            // Handle other errors
+                            alert('An unexpected error occurred. Please try again.');
+                        }
+                    }
+                });
             });
         });
     </script>

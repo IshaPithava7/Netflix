@@ -7,6 +7,8 @@ use App\Models\Video;
 use App\Services\VideoService;
 use App\Models\Collection;
 use App\Models\Type;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class VideoController extends Controller
@@ -40,10 +42,18 @@ class VideoController extends Controller
     }
 
     // Store uploaded video
-    public function store(VideoRequest $request)
+    public function store(VideoRequest $request): JsonResponse
     {
-        $this->videoService->createVideo($request, $request->validated());
-        return redirect()->route('admin.videos.index')->with('success', 'Video uploaded successfully.');
+        try {
+            $video = $this->videoService->createVideo($request, $request->validated());
+            return response()->json([
+                'message' => 'Video uploaded successfully.',
+                'video' => $video
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error('Video upload failed: '.$e->getMessage());
+            return response()->json(['message' => 'An error occurred while uploading the video.'], 500);
+        }
     }
 
     // Show edit form
@@ -56,16 +66,42 @@ class VideoController extends Controller
     }
 
     // Update video metadata
-    public function update(VideoRequest $request, Video $video)
+    public function update(VideoRequest $request, Video $video): JsonResponse
     {
-        $this->videoService->updateVideo($request, $video, $request->validated());
-        return redirect()->route('admin.videos.index')->with('success', 'Video updated successfully!');
+        try {
+            $video = $this->videoService->updateVideo($request, $video, $request->validated());
+            return response()->json([
+                'message' => 'Video updated successfully!',
+                'video' => $video
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Video update failed: '.$e->getMessage());
+            return response()->json(['message' => 'An error occurred while updating the video.'], 500);
+        }
     }
 
-    public function destroy(Video $video)
+    public function destroy(Video $video): JsonResponse
     {
-        Storage::disk('public')->delete([$video->file_path, $video->poster, $video->title_poster]);
-        $video->delete();
-        return redirect()->route('admin.videos.index')->with('success', 'Video deleted successfully!');
+        try {
+            $files = [
+                $video->trailer,
+                $video->poster,
+                $video->mini_poster,
+            ];
+
+            // Remove null or empty file names
+            $files = array_filter($files);
+
+            if (!empty($files)) {
+                Storage::disk('public')->delete($files);
+            }
+
+            $video->delete();
+
+            return response()->json(['message' => 'Video deleted successfully!']);
+        } catch (\Exception $e) {
+            Log::error('Video deletion failed: '.$e->getMessage());
+            return response()->json(['message' => 'An error occurred while deleting the video.'], 500);
+        }
     }
 }

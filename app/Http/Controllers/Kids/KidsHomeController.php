@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Video;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class KidsHomeController extends Controller
 {
     public function index()
     {
@@ -15,7 +15,7 @@ class HomeController extends Controller
         // We can add more complex logic for collections, etc. later.
         $videos = Video::where('for_kids', true)->get();
 
-        return view('kids.home', compact('videos'));
+        return view('kids.pages.home', compact('videos'));
     }
 
     public function exit()

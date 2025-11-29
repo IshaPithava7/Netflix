@@ -199,7 +199,7 @@
                                 <video id="heroVideo"
                                     class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-700"
                                     muted playsinline preload="auto" poster="{{ $poster }}">
-                                    <source src="{{ asset('storage/' . $featured->file_path) }}" type="video/mp4">
+                                    <source src="{{ asset('storage/' . $featured->trailer) }}" type="video/mp4">
                                 </video>
                                 <span>Play</span>
                             </button>
@@ -210,8 +210,8 @@
                                 data-video-id="{{ $featured->id }}" data-title="{{ $featured->title }}"
                                 data-description="{{ $featured->description }}"
                                 data-duration="{{ $featured->duration ?? '1h 52m' }}" data-poster="{{ $poster }}"
-                                data-file="{{ $featured->file_path ? asset('storage/' . $featured->file_path) : '' }}"
-                                data-title-poster="{{ $featured->title_poster ? asset('storage/' . $featured->title_poster) : '' }}"
+                                data-trailer="{{ $featured->trailer ? asset('storage/' . $featured->trailer) : '' }}"
+                                data-mini-poster="{{ $featured->mini_poster ? asset('storage/' . $featured->mini_poster) : '' }}"
                                 data-genres="{{ $additionalSection['metadata']['genre'] ?? 'Drama • Action' }}">
                                 <svg viewBox="0 0 24 24" width="24" height="24" data-icon="CircleIMedium"
                                     data-icon-id=":r25:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -277,8 +277,10 @@
     </div>
 
     {{-- modals --}}
-    @include('home.models.more_info_model')
-    @include('home.models.section_more_info_model')
+    @if(isset($featured) && $featured)
+        @include('home.models.more_info_model', ['featured' => $featured, 'poster' => $featured->poster ? asset('storage/' . $featured->poster) : asset('defaults/poster.jpg')])
+        @include('home.models.section_more_info_model')
+    @endif
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>

@@ -313,8 +313,10 @@
         </div>
 
         {{-- modals --}}
-        @include('home.models.more_info_model')
-        @include('home.models.section_more_info_model')
+        @if(isset($featured) && $featured)
+            @include('home.models.more_info_model', ['featured' => $featured, 'poster' => $featured->poster ? asset('storage/' . $featured->poster) : asset('defaults/poster.jpg')])
+            @include('home.models.section_more_info_model')
+        @endif
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
