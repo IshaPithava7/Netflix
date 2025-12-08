@@ -189,7 +189,7 @@
 
                         <!-- Buttons -->
                         <div class="flex space-x-4">
-                            <button
+                            <button id="playButton"
                                 class="bg-[#FFFFFF] text-black font-bold w-[126px] h-[46px] rounded-md! justify-center hover:bg-[#C3C1C1] transition duration-300 flex items-center space-x-2">
                                 <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
                                     <path
@@ -286,6 +286,15 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            $('#playButton').on('click', function() {
+                var video = $('#heroVideo')[0];
+                if (video.paused) {
+                    video.play();
+                } else {
+                    video.pause();
+                }
+            });
 
             /* ===============================
                 HERO ANIMATION

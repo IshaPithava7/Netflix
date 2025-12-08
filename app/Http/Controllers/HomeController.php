@@ -24,14 +24,15 @@ class HomeController extends Controller
             'id',
             'title',
             'poster',
-            'file_path',
-            'title_poster',
+            'trailer',
+            'origin_movie',
+            'mini_poster',
             'description'
         ])->limit(10)->get();
 
         $allCollections = Collection::with([
             'videos' => function ($q) {
-                $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');
+                $q->select('videos.id', 'title', 'poster', 'trailer', 'origin_movie', 'mini_poster', 'description');
             }
         ])
             ->has('videos')
@@ -79,7 +80,7 @@ class HomeController extends Controller
 
         $collections = Collection::with([
             'videos' => function ($q) {
-                $q->select('videos.id', 'title', 'poster', 'file_path', 'title_poster', 'description');
+                $q->select('videos.id', 'title', 'poster', 'trailer', 'origin_movie', 'mini_poster', 'description');
             }
         ])
             ->whereNotIn('id', $skipId)

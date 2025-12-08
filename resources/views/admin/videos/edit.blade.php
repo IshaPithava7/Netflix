@@ -154,7 +154,6 @@
                 </div>
 
                 <!-- Video URL -->
-                <!-- Video URL -->
                 <div class="mt-4">
                     <label for="video_url" class="block text-sm font-medium mb-1">Video URL</label>
 

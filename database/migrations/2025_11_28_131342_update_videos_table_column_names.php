@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->renameColumn('moni_poster', 'title_poster');
+            $table->renameColumn('mini_poster', 'title_poster');
             $table->renameColumn('trailer', 'file_path');
             $table->renameColumn('origin_movie', 'video_url');
             $table->unsignedBigInteger('tmdb_id')->nullable();

@@ -164,7 +164,7 @@
                     <p class="text-white text-lg max-w-lg mb-6">{{ $featured->description }}</p>
 
                     <div class="flex space-x-4">
-                        <a href="#" class="flex items-center justify-center bg-white text-black font-bold px-8 py-3 rounded hover:bg-gray-200 transition-colors duration-300">
+                        <a href="#" id="playButton" class="flex items-center justify-center bg-white text-black font-bold px-8 py-3 rounded hover:bg-gray-200 transition-colors duration-300">
                             <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
@@ -234,6 +234,17 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         $(document).ready(function() {
+            $('#playButton').on('click', function(e) {
+                e.preventDefault();
+                const $heroVideo = $("#heroVideo");
+                const $heroPoster = $("#heroPoster");
+
+                if ($heroVideo.length) {
+                    $heroPoster.addClass("opacity-0");
+                    $heroVideo.removeClass("opacity-0").get(0).play();
+                }
+            });
+
             /* ===============================
                    HERO ANIMATION
                   =============================== */
